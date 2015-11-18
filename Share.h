@@ -64,6 +64,7 @@ enum class Item{
 	COMIC,
     GAME,
     MAX,
+
 };
 
 struct Object{

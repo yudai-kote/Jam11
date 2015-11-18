@@ -3,7 +3,7 @@
 
 /////////コンストラクタ
 Player::Player(){
-    select_Item = Item::COMIC;
+    
     Setup();
 
 }
@@ -11,6 +11,10 @@ Player::Player(){
 void Player::Setup(){
     cost = 50;
     select_Item = Item::COMIC;
+
+}
+
+void Player::Update(){
 
 }
 
@@ -30,4 +34,8 @@ Item Player::GetSelectItem(){
 
 int Player::GetCost(){
     return cost;
+}
+
+void Player::SetSelectItem(Item _item){
+    select_Item = _item;
 }
