@@ -7,11 +7,13 @@ public:
     Player();
     Vec2f GetMousePosition();
     bool MouseClick();
-    int GetSelectUnit();
+    Item GetSelectItem();
+
+
 
 private:
 
-    int select_unit;
+    Item select_Item;
 
 
 };
