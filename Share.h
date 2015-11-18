@@ -60,4 +60,8 @@ struct Object{
 	Color color;
 
 	Texture tex;
+
+	float angle;
+	Vec2f zoom;
+	Vec2f center;
 };
