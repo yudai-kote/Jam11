@@ -36,7 +36,7 @@ private:
 
 
 	std::vector<std::vector<Block>> block;
-	std::ifstream* file_list[FILE_MAX];
+	std::ifstream file_list[FILE_MAX];
 	std::vector<std::vector<Element>> block_element;
 
 	std::vector<std::vector<int>> one_or_zero;
