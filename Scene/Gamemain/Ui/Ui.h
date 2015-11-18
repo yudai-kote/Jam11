@@ -17,8 +17,13 @@ public:
 private:
     Font font = Font("res/meiryo.ttc");
     
-    Object itemobject[static_cast<int>(Item::MAX)-1];
-    
+    Object itemobject[static_cast<int>(Item::MAX)];
+    //Texture comic;
+    Texture desk;
+    Texture game;
+    Texture robot;
+    Texture comic;
+
 
     
     
