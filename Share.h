@@ -23,7 +23,18 @@ public:
 		return singleton_env;
 	}
 };
+class Rand_{
+public:
 
+    static Random& get()
+    {
+        static Random rand;
+
+        return rand;
+    }
+
+
+};
 
 enum class Scenename{
 	TITLE,
@@ -47,12 +58,16 @@ enum class Direction{
 };
 
 enum class Item{
-	ROBOT,
+	AIR,
+    DESK,
+    ROBOT,
 	COMIC,
+    GAME,
+    MAX,
 };
 
 struct Object{
-	Vec2i pos;			//原点位置
+	Vec2f pos;			//原点位置
 	Vec2f size;			//サイズ
 	Vec2f offset_pos;	//切り取り位置
 	Vec2f offset_size;	//切り取りサイズ

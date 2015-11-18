@@ -22,7 +22,7 @@ void Title::Update(){
 
 void Title::Draw(){
 
-
+    drawBox(100, 100, 100, 100, 100, Color::blue);
 
 }
 

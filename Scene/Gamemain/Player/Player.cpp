@@ -4,6 +4,13 @@
 /////////コンストラクタ
 Player::Player(){
     select_Item = Item::COMIC;
+    Setup();
+
+}
+
+void Player::Setup(){
+    cost = 50;
+    select_Item = Item::COMIC;
 
 }
 
@@ -19,4 +26,8 @@ bool Player::MouseClick(){
 Item Player::GetSelectItem(){
 
     return select_Item;
+}
+
+int Player::GetCost(){
+    return cost;
 }
