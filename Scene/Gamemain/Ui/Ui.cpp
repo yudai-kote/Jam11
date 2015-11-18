@@ -54,11 +54,11 @@ void Ui::Draw(){
 }
 
 void Ui::SelectDraw(Item _item){
-    std::cout <<  static_cast<int>(_item) << std::endl;
+    
 
     for (int i = 0; i < static_cast<int>(Item::MAX)-1; i++)
     {  
-        if (_item == static_cast<Item>(i))
+        if (_item == static_cast<Item>(i+1))
         {
             drawBox(itemobject[i].pos, itemobject[i].size, Color::yellow);
         }        
@@ -72,7 +72,7 @@ Item Ui::Select(Item _item){
         for (int i = 0; i < static_cast<int>(Item::MAX); i++)
         {
             if (collision(env.mousePosition(), itemobject[i].pos, itemobject[i].size)){
-                return static_cast<Item>(i);
+                return static_cast<Item>(i+1);
             }
         }
     }

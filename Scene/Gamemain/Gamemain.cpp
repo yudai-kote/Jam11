@@ -15,7 +15,7 @@ void Gamemain::Update(){
 
 	map.Update();
     player.SetSelectItem(ui.Select(player.GetSelectItem()));
-
+    map.Editor(player.GetSelectItem(), player.MouseClick());
 }
 
 void Gamemain::Draw(){
