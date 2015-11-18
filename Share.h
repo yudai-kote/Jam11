@@ -23,7 +23,18 @@ public:
 		return singleton_env;
 	}
 };
+class Rand_{
+public:
 
+    static Random& get()
+    {
+        static Random rand;
+
+        return rand;
+    }
+
+
+};
 
 enum class Scenename{
 	TITLE,
@@ -49,7 +60,8 @@ enum class Direction{
 enum class Item{
 	ROBOT,
 	COMIC,
-    MAX
+    GAME,
+    MAX,
 };
 
 struct Object{
