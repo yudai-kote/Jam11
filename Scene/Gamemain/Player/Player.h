@@ -5,13 +5,18 @@ class Player
 public:
  
     Player();
+    void Setup();
+
+
     Vec2f GetMousePosition();
     bool MouseClick();
-    int GetSelectUnit();
+    Item GetSelectItem();
+    int GetCost();
+
 
 private:
 
-    int select_unit;
-
+    Item select_Item;
+    int cost;
 
 };
