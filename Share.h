@@ -1,8 +1,12 @@
 #pragma once
-#include "lib\framework.hpp"
+#include "lib/framework.hpp"
 #include <iostream>
 #include <string>
 #include <vector>
+#include <list>
+#include <fstream>
+
+
 
 #define env App::Get()
 
@@ -45,6 +49,15 @@ enum class Direction{
 enum class Item{
 	ROBOT,
 	COMIC,
+};
 
+struct Object{
+	Vec2i pos;			//原点位置
+	Vec2f size;			//サイズ
+	Vec2f offset_pos;	//切り取り位置
+	Vec2f offset_size;	//切り取りサイズ
 
+	Color color;
+
+	Texture tex;
 };
