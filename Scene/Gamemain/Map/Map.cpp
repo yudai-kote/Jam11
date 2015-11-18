@@ -3,11 +3,13 @@
 Map::Map(){
 
 	block = std::vector<std::vector<Block>>(LENGTH, std::vector<Block>(WIDE));
+	one_or_zero = std::vector<std::vector<int>>(LENGTH, std::vector<int>(WIDE));
 	block_element = std::vector<std::vector<Element>>(LENGTH, std::vector<Element>(WIDE));
 
 	const char* file_name[FILE_MAX]
 	{
 		"res/Map_file/stage1.txt"
+			
 	};
 	for (int index = 0; index < FILE_MAX; index++)
 	{
@@ -28,6 +30,7 @@ Map::Map(){
 	const char* texture_list[TEXTURE_MAX]
 	{
 		"res/Texture/stage_classroom.png",
+			"res/Texture/desk.png",
 	};
 	for (int index = 0; index < TEXTURE_MAX; index++)
 	{
@@ -47,7 +50,7 @@ void Map::TextureSetup(){
 }
 
 void Map::Update(){
-
+	ChangeBlock();
 
 }
 
@@ -64,7 +67,17 @@ void Map::Draw(){
 		for (int x = 0; x < block[y].size(); x++)
 		{
 			*file_list[STAGE1] >> block[y][x].blocktype;
+			
 			block[y][x].Draw();
+			if (block[y][x].blocktype == '1')
+			{
+				drawTextureBox(block_element[y][x].pos.x(), block_element[y][x].pos.y(),
+							   block_element[y][x].size.x(), block_element[y][x].size.y(),
+							   0, 0,
+							   512, 512,
+							   *tex_list[TEX_DESK],
+							   Color::red);
+			}
 		}
 	}
 
@@ -85,18 +98,23 @@ void Map::Editor(Item item, bool is_put){
 				{
 					if (env.isPushButton(Mouse::LEFT))
 					{
-						if (block[y][x].GetItem() == Item::AIR && item == Item::DESK)
+						if (block[y][x].blocktype != PLAYER_START_POS&&
+							block[y][x].blocktype != ENEMY_START_POS&&
+							block[y][x].blocktype != DESK_BLOCK)
 						{
-							block[y][x].SetDesk(item);
-						}
-						if (block[y][x].GetDesk() == Item::DESK && item != Item::DESK)
-						{
-							block[y][x].SetItem(item);
-						}
-						if (block[y][x].GetDesk() == Item::DESK && item == Item::AIR)
-						{
-							block[y][x].SetItem(item);
-							block[y][x].SetDesk(item);
+							if (block[y][x].GetItem() == Item::AIR && item == Item::DESK)
+							{
+								block[y][x].SetDesk(item);
+							}
+							if (block[y][x].GetDesk() == Item::DESK && item != Item::DESK)
+							{
+								block[y][x].SetItem(item);
+							}
+							if (block[y][x].GetDesk() == Item::DESK && item == Item::AIR)
+							{
+								block[y][x].SetItem(item);
+								block[y][x].SetDesk(item);
+							}
 						}
 					}
 				}
@@ -115,4 +133,64 @@ bool Map::pointCollision(Vec2f point_pos, Vec2i box_pos, Vec2i box_size){
 			point_pos.x() < box_pos.x() + box_size.x() &&
 			point_pos.y() > box_pos.y() &&
 			point_pos.y() < box_pos.y() + box_size.y());
+}
+
+
+
+void Map::ChangeBlock(){
+
+	for (int y = 0; y < block.size(); y++)
+	{
+		for (int x = 0; x < block[y].size(); x++)
+		{
+			*file_list[STAGE1] >> block[y][x].blocktype;
+
+			if (block[y][x].blocktype == DESK_BLOCK)
+			{
+				one_or_zero[y][x] = 1;
+			}
+			if (block[y][x].blocktype == PLAYER_START_POS)
+			{
+				one_or_zero[y][x] = 0;
+			}
+			if (block[y][x].blocktype == ENEMY_START_POS)
+			{
+				one_or_zero[y][x] = 0;
+			}
+			if (block[y][x].GetDesk() == Item::DESK)
+			{
+				one_or_zero[y][x] = 1;
+			}
+
+		}
+	}
+
+}
+
+Vec2f Map::GetPlayerPos(){
+	for (int y = 0; y < block.size(); y++)
+	{
+		for (int x = 0; x < block[y].size(); x++)
+		{
+			if (block[y][x].blocktype == PLAYER_START_POS)
+			{
+				return Vec2f((float)block_element[y][x].pos.x(),
+							 (float)block_element[y][x].pos.y());
+			}
+		}
+	}
+}
+
+Vec2f Map::GetEnemyPos(){
+	for (int y = 0; y < block.size(); y++)
+	{
+		for (int x = 0; x < block[y].size(); x++)
+		{
+			if (block[y][x].blocktype == ENEMY_START_POS)
+			{
+				return Vec2f((float)block_element[y][x].pos.x(),
+							 (float)block_element[y][x].pos.y());
+			}
+		}
+	}
 }
