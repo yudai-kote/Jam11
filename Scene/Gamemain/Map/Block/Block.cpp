@@ -67,7 +67,14 @@ void Block::Draw(){
 		break;
 	}
 
-	
+	if (blocktype == '1'){
+		drawTextureBox(block.pos.x(), block.pos.y(),
+					   block.size.x(), block.size.y(),
+					   block.offset_pos.x(), block.offset_pos.y(),
+					   block.offset_size.x(), block.offset_size.y(),
+					   *tex_list[DESK],
+					   Color::red);
+	}
 }
 
 void Block::SetElement(Vec2i pos, Vec2i size, Item type){
