@@ -21,6 +21,8 @@ private:
 
 	Item is_desk;
 
+
+
 public:
 
 	Block(){
