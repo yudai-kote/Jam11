@@ -11,6 +11,7 @@ class Gamemain : public Classbase{
 private:
     Ui ui;
     Player player;
+	Map map;
 
 
 public:
