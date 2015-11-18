@@ -8,21 +8,21 @@ Map::Map(){
 
 	const char* file_name[FILE_MAX]
 	{
-		"res/Map_file/stage1.txt"
-			
+		"res/Map_file/stage1.txt",
 	};
 	for (int index = 0; index < FILE_MAX; index++)
 	{
-		file_list[index] = new std::ifstream(file_name[index]);
+		file_list[index] = std::ifstream(file_name[index]);
 	}
 
 	for (int y = 0; y < block.size(); y++)
 	{
 		for (int x = 0; x < block[y].size(); x++)
 		{
+			file_list[STAGE1] >> block[y][x].blocktype;
 			block_element[y][x].size = Vec2i(WIDTH * 3 / 4 / block.size(), HEIGHT / block.size());
 			block_element[y][x].pos.x() = -WIDTH / 2 + (WIDTH * 3 / 4 / block.size())*x;
-			block_element[y][x].pos.y() = -HEIGHT / 2 + (HEIGHT / block.size())*y;
+			block_element[y][x].pos.y() = HEIGHT / 2 - (HEIGHT / block.size())*y - HEIGHT / block.size();
 			block[y][x].SetElement(block_element[y][x].pos, block_element[y][x].size, Item::AIR);
 		}
 	}
@@ -61,15 +61,17 @@ void Map::Draw(){
 				   0, 0,
 				   1024, 1024,
 				   *tex_list[FLOOR], Color::white);
-
+	//std::ifstream a = std::ifstream("res/Map_file/stage1.txt");
+	
 	for (int y = 0; y < block.size(); y++)
 	{
 		for (int x = 0; x < block[y].size(); x++)
 		{
-			*file_list[STAGE1] >> block[y][x].blocktype;
-			
+			file_list[STAGE1] >> block[y][x].blocktype;
+			//a >> block[y][x].blocktype;
 			block[y][x].Draw();
-			if (block[y][x].blocktype == '1')
+			//block[0][0].blocktype = 1;
+			if (block[y][x].blocktype == DESK_BLOCK)
 			{
 				drawTextureBox(block_element[y][x].pos.x(), block_element[y][x].pos.y(),
 							   block_element[y][x].size.x(), block_element[y][x].size.y(),
@@ -143,7 +145,7 @@ void Map::ChangeBlock(){
 	{
 		for (int x = 0; x < block[y].size(); x++)
 		{
-			*file_list[STAGE1] >> block[y][x].blocktype;
+			file_list[STAGE1] >> block[y][x].blocktype;
 
 			if (block[y][x].blocktype == DESK_BLOCK)
 			{
