@@ -10,7 +10,7 @@ Player::Player(){
 
 void Player::Setup(){
     cost = 50;
-    select_Item = Item::COMIC;
+    select_Item = Item::DESK;
 
 }
 

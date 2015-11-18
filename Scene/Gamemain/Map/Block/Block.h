@@ -19,16 +19,21 @@ private:
 
 	Texture *tex_list[TEXTURE_MAX];
 
+	Item is_desk;
+
 public:
 
 	Block(){
 		block.pos = Vec2f(0, 0);
 		block.size = Vec2f(50.0f, 50.0f);
+		block.offset_pos = Vec2f(0.0f, 0.0f);
+		block.offset_size = Vec2f(512.0f, 512.0f);
 		block.zoom = Vec2f(1.0f, 1.0f);
 		block.center = Vec2f(0.0f, 0.0f);
 		block.color = Color(1, 1, 1, 0.3);
 		block.angle = 0;
 		category = Item::AIR;
+		is_desk = Item::AIR;
 
 		const char* texture_list[TEXTURE_MAX]
 		{
@@ -54,5 +59,9 @@ public:
 	void SetElement(Vec2i pos, Vec2i size, Item type);
 	void SetColor(Color block_color);
 	void SetItem(Item item);
+	void SetDesk(Item desk);
+
+	Item GetItem();
+	Item GetDesk();
 
 };

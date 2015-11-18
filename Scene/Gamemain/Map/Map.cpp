@@ -72,20 +72,32 @@ void Map::Draw(){
 
 void Map::Editor(Item item, bool is_put){
 
-	if (is_put == true)
+
+	for (int y = 0; y < block.size(); y++)
 	{
-		for (int y = 0; y < block.size(); y++)
+		for (int x = 0; x < block[y].size(); x++)
 		{
-			for (int x = 0; x < block[y].size(); x++)
+			block[y][x].SetColor(Color(1, 1, 1, 0.3));
+			if (pointCollision(env.mousePosition(), block_element[y][x].pos, block_element[y][x].size) == true)
 			{
-				block[y][x].SetColor(Color(1, 1, 1, 0.3));
-				if (pointCollision(env.mousePosition(), block_element[y][x].pos, block_element[y][x].size) == true)
+				block[y][x].SetColor(Color(0.0f, 1.0f, 1.0f, 0.3));
+				if (is_put == true)
 				{
-					block[y][x].SetColor(Color(0.0f, 1.0f, 1.0f, 0.3));
-					//block[y][x].SetElement(block_element[y][x].pos, block_element[y][x].size, '0');
 					if (env.isPushButton(Mouse::LEFT))
 					{
-						block[y][x].SetItem(item);
+						if (block[y][x].GetItem() == Item::AIR && item == Item::DESK)
+						{
+							block[y][x].SetDesk(item);
+						}
+						if (block[y][x].GetDesk() == Item::DESK && item != Item::DESK)
+						{
+							block[y][x].SetItem(item);
+						}
+						if (block[y][x].GetDesk() == Item::DESK && item == Item::AIR)
+						{
+							block[y][x].SetItem(item);
+							block[y][x].SetDesk(item);
+						}
 					}
 				}
 
