@@ -14,12 +14,14 @@ void Gamemain::Setup(){
 void Gamemain::Update(){
 
 	map.Update();
+    player.SetSelectItem(ui.Select(player.GetSelectItem()));
+
 }
 
 void Gamemain::Draw(){
     ui.Draw();
     ui.Cost(player.GetCost());
-
+    ui.SelectDraw(player.GetSelectItem());
 	map.Draw();
 }
 

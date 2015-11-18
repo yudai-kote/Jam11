@@ -9,7 +9,7 @@ public:
 
     void Setup();
     void Cost(const int& cost);
-    Item Select(bool _Push);
+    Item Select(Item _item);
     void SelectDraw(Item _item);
 
 
@@ -17,7 +17,7 @@ public:
 private:
     Font font = Font("res/meiryo.ttc");
     
-    Object itemobject[static_cast<int>(Item::MAX)];
+    Object itemobject[static_cast<int>(Item::MAX)-1];
     
 
     
