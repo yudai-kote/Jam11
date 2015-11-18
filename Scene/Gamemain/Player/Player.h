@@ -26,4 +26,6 @@ private:
     Vec2f pos;
     Texture player;
     int ani_count;
+    
+
 };

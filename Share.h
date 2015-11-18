@@ -63,6 +63,10 @@ enum class Item{
     ROBOT,
 	COMIC,
     GAME,
+    
+    ROBOT_EX,
+    COMIC_EX,
+    GAME_EX,
     MAX,
 
 };

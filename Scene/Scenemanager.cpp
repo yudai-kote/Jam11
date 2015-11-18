@@ -6,7 +6,7 @@ Scenemanager::Scenemanager(){
 }
 
 void Scenemanager::Setup(){
-	scenechange = Scenename::GAMEMAIN;
+	scenechange = Scenename::TITLE;
 }
 
 
