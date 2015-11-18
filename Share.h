@@ -58,7 +58,9 @@ enum class Direction{
 };
 
 enum class Item{
-	ROBOT,
+	AIR,
+    DESK,
+    ROBOT,
 	COMIC,
     GAME,
     MAX,

@@ -9,19 +9,18 @@ public:
 
     void Setup();
     void Cost(const int& cost);
-    Item Select(Vec2f _mouse, bool _Push);
-
+    Item Select(bool _Push);
+    void SelectDraw(Item _item);
 
 
 
 private:
     Font font = Font("res/meiryo.ttc");
+    
+    Object itemobject[static_cast<int>(Item::MAX)];
+    
 
     
     
-    struct ItemForm 
-    {
-        
-    };
 };
 
