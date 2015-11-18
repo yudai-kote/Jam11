@@ -21,11 +21,16 @@ Ui::Ui()
 
 void Ui::Setup(){
     font.size(100);
-    for (int i = 0; i < static_cast<int>(Item::MAX)-1; i++)
+    for (int i = 0; i < static_cast<int>(Item::MAX); i++)
     {
         itemobject[i].size = Vec2f(100, 100);
         itemobject[i].pos = Vec2f(450, 120 - i * 120);
     }
+
+    desk = Texture("res/Texture/desk.png");
+    game = Texture("res/Texture/game.png");
+    robot = Texture("res/Texture/robot.png");
+    comic = Texture("res/Texture/comic.png");
 }
 void Ui::Cost(const int& cost){
     font.draw("コスト　" , Vec2f(WIDTH / 4, HEIGHT / 2-100),Color::white);
@@ -37,7 +42,7 @@ void Ui::Cost(const int& cost){
 
 void Ui::Draw(){
 
-    drawFillBox(WIDTH / 4, -HEIGHT / 2, WIDTH / 4, HEIGHT, Color::blue);
+    drawFillBox(WIDTH / 4, -HEIGHT / 2, WIDTH / 4, HEIGHT, Color::green);
     /*for (int y = 0; y < 8; y++){
         for (int x = 0; x < 8; x++)
         {
@@ -46,19 +51,48 @@ void Ui::Draw(){
         }
     }*/
 
-    for (int i = 0; i < static_cast<int>(Item::MAX)-1; i++)
+    for (int i = 0; i < static_cast<int>(Item::MAX); i++)
     {
-        drawFillBox(itemobject[i].pos.x(), itemobject[i].pos.y(),
-            itemobject[i].size.x(), itemobject[i].size.y(), Color::white);
+       /* drawFillBox(itemobject[i].pos.x(), itemobject[i].pos.y(),
+            itemobject[i].size.x(), itemobject[i].size.y(), Color::white);*/
+        switch (static_cast<Item>(i))
+        {
+        case Item::AIR:
+                drawFillBox(itemobject[i].pos.x(), itemobject[i].pos.y(),
+                itemobject[i].size.x(), itemobject[i].size.y(), Color::white);
+            break;
+        case Item::DESK:
+            drawTextureBox(itemobject[i].pos.x(), itemobject[i].pos.y(),
+                itemobject[i].size.x(), itemobject[i].size.y(), 0, 0, 512, 512, desk);
+            break;
+        case Item::ROBOT:
+            drawTextureBox(itemobject[i].pos.x(), itemobject[i].pos.y(),
+                itemobject[i].size.x(), itemobject[i].size.y(), 0, 0, 512, 512,robot);
+
+            break;
+        case Item::COMIC:
+            drawTextureBox(itemobject[i].pos.x(), itemobject[i].pos.y(),
+                itemobject[i].size.x(), itemobject[i].size.y(), 0, 0, 512, 512, comic);
+
+            break;
+        case Item::GAME:
+            drawTextureBox(itemobject[i].pos.x(), itemobject[i].pos.y(),
+                itemobject[i].size.x(), itemobject[i].size.y(), 0, 0, 512, 512,game);
+
+            break;
+
+
+
+        }
     }
 }
 
 void Ui::SelectDraw(Item _item){
     
 
-    for (int i = 0; i < static_cast<int>(Item::MAX)-1; i++)
+    for (int i = 0; i < static_cast<int>(Item::MAX); i++)
     {  
-        if (_item == static_cast<Item>(i+1))
+        if (_item == static_cast<Item>(i))
         {
             drawBox(itemobject[i].pos, itemobject[i].size, Color::yellow);
         }        
@@ -72,7 +106,7 @@ Item Ui::Select(Item _item){
         for (int i = 0; i < static_cast<int>(Item::MAX); i++)
         {
             if (collision(env.mousePosition(), itemobject[i].pos, itemobject[i].size)){
-                return static_cast<Item>(i+1);
+                return static_cast<Item>(i);
             }
         }
     }
