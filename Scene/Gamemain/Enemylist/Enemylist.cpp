@@ -39,7 +39,8 @@ void Enemylist::SetPos(Vec2f set, int i){
 void Enemylist::Draw(){
 	for (auto itr = l_enemy.begin(); itr != l_enemy.end(); ++itr)
 	{
-        //drawFillBox((*itr)->GetPos.x(), (*itr)->GetPos.x())
+		drawFillBox((*itr)->GetPos().x(), (*itr)->GetPos().y(), (*itr)->GetSize().x(),
+			(*itr)->GetSize().y(), Color::cyan);
 	}
 	
 }
