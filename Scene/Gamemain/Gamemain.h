@@ -5,14 +5,14 @@
 #include "Ui/Ui.h"
 #include "Map/Map.h"
 #include "Player/Player.h"
-
+#include "Enemylist/Enemylist.h"
 
 class Gamemain : public Classbase{
 private:
     Ui ui;
     Player player;
 	Map map;
-
+    Enemylist enemylist;
 
 public:
 	Gamemain();
