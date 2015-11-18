@@ -17,6 +17,7 @@ void Gamemain::Update(){
 
 void Gamemain::Draw(){
     ui.Draw();
+    ui.Cost(player.GetCost());
 }
 
 
