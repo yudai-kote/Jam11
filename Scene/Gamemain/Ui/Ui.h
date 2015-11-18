@@ -9,19 +9,23 @@ public:
 
     void Setup();
     void Cost(const int& cost);
-    Item Select(Vec2f _mouse, bool _Push);
-
+    Item Select(Item _item);
+    void SelectDraw(Item _item);
 
 
 
 private:
     Font font = Font("res/meiryo.ttc");
+    
+    Object itemobject[static_cast<int>(Item::MAX)];
+    //Texture comic;
+    Texture desk;
+    Texture game;
+    Texture robot;
+    Texture comic;
+
 
     
     
-    struct ItemForm 
-    {
-        
-    };
 };
 

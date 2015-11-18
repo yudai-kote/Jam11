@@ -3,15 +3,20 @@
 
 /////////コンストラクタ
 Player::Player(){
-    select_Item = Item::COMIC;
+    
     Setup();
 
 }
 
 void Player::Setup(){
     cost = 50;
-    select_Item = Item::COMIC;
+    select_Item = Item::DESK;
+    player = Texture("res/character/fuukiiinn.png");
+    
+}
 
+void Player::Update(){
+    ani_count++;
 }
 
 
@@ -30,4 +35,16 @@ Item Player::GetSelectItem(){
 
 int Player::GetCost(){
     return cost;
+}
+
+void Player::SetSelectItem(Item _item){
+    select_Item = _item;
+}
+
+void Player::SetPos(Vec2f _pos){
+    pos = _pos;
+}
+
+void Player::Draw(){
+    drawTextureBox(pos.x(), pos.y(), HEIGHT / 8, HEIGHT / 8, ani_count/12%4*512, 0, 512, 512, player);
 }
