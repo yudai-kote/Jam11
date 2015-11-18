@@ -21,7 +21,7 @@ Ui::Ui()
 
 void Ui::Setup(){
     font.size(100);
-    for (int i = 0; i < static_cast<int>(Item::MAX); i++)
+    for (int i = 0; i < static_cast<int>(Item::MAX)-1; i++)
     {
         itemobject[i].size = Vec2f(100, 100);
         itemobject[i].pos = Vec2f(450, 120 - i * 120);
@@ -46,34 +46,37 @@ void Ui::Draw(){
         }
     }*/
 
-    for (int i = 0; i < static_cast<int>(Item::MAX); i++)
+    for (int i = 0; i < static_cast<int>(Item::MAX)-1; i++)
     {
         drawFillBox(itemobject[i].pos.x(), itemobject[i].pos.y(),
             itemobject[i].size.x(), itemobject[i].size.y(), Color::white);
     }
-    //std::cout << env.mousePosition().x() << "  " << env.mousePosition().y() << std::endl;
 }
 
 void Ui::SelectDraw(Item _item){
-    for (int i = 0; i < static_cast<int>(Item::MAX); i++)
+    std::cout <<  static_cast<int>(_item) << std::endl;
+
+    for (int i = 0; i < static_cast<int>(Item::MAX)-1; i++)
     {  
         if (_item == static_cast<Item>(i))
         {
             drawBox(itemobject[i].pos, itemobject[i].size, Color::yellow);
-        }
-        
+        }        
     }
 }
 
-Item Ui::Select(bool _Push){
+Item Ui::Select(Item _item){
 
-    for (int i = 0; i < static_cast<int>(Item::MAX); i++)
-    {
-        if(collision(env.mousePosition(), itemobject[i].pos, itemobject[i].size)){
-            return static_cast<Item>(i);
+
+    if (env.isPushButton(Mouse::LEFT)){
+        for (int i = 0; i < static_cast<int>(Item::MAX); i++)
+        {
+            if (collision(env.mousePosition(), itemobject[i].pos, itemobject[i].size)){
+                return static_cast<Item>(i);
+            }
         }
-        
     }
+    return _item;
 }
 
 

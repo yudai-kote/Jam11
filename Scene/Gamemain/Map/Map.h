@@ -11,16 +11,16 @@ private:
 		FILE_MAX,
 	};
 
+	enum Texturefile{
+		FLOOR,
+		TEXTURE_MAX,
+	};
+
 	enum Mapchipsize{
 		LENGTH = 8,
 		WIDE = 8,
 	};
 
-	enum  Blocktype {
-		AIR_BLOCK = '0',
-		DESK = '1',
-
-	};
 	struct Element{
 		Vec2i pos;
 		Vec2i size;
@@ -31,8 +31,12 @@ private:
 
 	std::vector<std::vector<Element>> block_element;
 
-	Texture floor;
+	Texture *tex_list[TEXTURE_MAX];
 
+	
+
+
+	bool pointCollision(Vec2f point_pos, Vec2i box_pos, Vec2i box_size);
 public:
 
 	Map();
@@ -42,6 +46,7 @@ public:
 	void Draw();
 	void Update();
 
+	void Editor(Item item, bool is_put = true);
 
 
 };
