@@ -11,7 +11,7 @@ private:
 	Item stage[5];
 public:
 	Enemylist();
-	void PushEnemy();
+	void PushEnemy(Vec2f pos,int count);
 	void Draw();
 	void Move(Direction direction, int i);
 	Vec2f GetPos(int i);

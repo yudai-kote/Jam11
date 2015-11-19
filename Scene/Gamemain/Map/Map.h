@@ -38,13 +38,16 @@ private:
 	std::vector<std::vector<Block>> block;
 	std::ifstream file_list[FILE_MAX];
 	std::vector<std::vector<Element>> block_element;
-
 	std::vector<std::vector<int>> one_or_zero;
+
+	int cost = 1000;
+	int desk_cost = 100;
+	int item_cost = 50;
+	int item_cost_ex = 200;
 
 	Texture *tex_list[TEXTURE_MAX];
 
 	void ChangeBlock();
-
 
 	bool pointCollision(Vec2f point_pos, Vec2i box_pos, Vec2i box_size);
 public:
@@ -61,6 +64,6 @@ public:
 
 	Vec2f GetPlayerPos();
 	Vec2f GetEnemyPos();
-
+	int GetCost();
 
 };

@@ -9,13 +9,11 @@ Enemylist::Enemylist(){
 
 }
 
-void Enemylist::PushEnemy(){
-	int count = 0;
-	for (int i = 0; i < 5; i++){
-		count++;
-		l_enemy.push_back(new Gal(stage[i], count));
+void Enemylist::PushEnemy(Vec2f pos, int count){
+
+		l_enemy.push_back(new Gal(stage[count], count,pos));
 		
-	}
+	
 }
 
  Vec2f Enemylist::GetPos(int i){

@@ -7,13 +7,15 @@
 #include "Player/Player.h"
 #include "Enemylist/Enemylist.h"
 
+
 class Gamemain : public Classbase{
 private:
     Ui ui;
     Player player;
 	Map map;
-    Enemylist enemylist;
-
+	Enemylist enemylist;
+	int count;
+	int enemy_number;
 public:
 	Gamemain();
 

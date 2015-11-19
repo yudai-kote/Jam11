@@ -2,11 +2,11 @@
 
 Scenemanager::Scenemanager(){
     Setup();
-
 }
 
 void Scenemanager::Setup(){
 	scenechange = Scenename::GAMEMAIN;
+    gamemanager.Setup();
 }
 
 

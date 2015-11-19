@@ -24,7 +24,7 @@ void Ui::Setup(){
     for (int i = 0; i < static_cast<int>(Item::MAX); i++)
     {
         itemobject[i].size = Vec2f(100, 100);
-        itemobject[i].pos = Vec2f(450, 120 - i * 120);
+        itemobject[i].pos = Vec2f(350 + (i/6)*120, 120 - (i%5) * 120);
     }
 
     desk = Texture("res/Texture/desk.png");
@@ -80,11 +80,15 @@ void Ui::Draw(){
                 itemobject[i].size.x(), itemobject[i].size.y(), 0, 0, 512, 512,game);
 
             break;
-
-
+        
+        default:
+            drawFillBox(itemobject[i].pos.x(), itemobject[i].pos.y(),
+                itemobject[i].size.x(), itemobject[i].size.y(), Color::white);
+            break;
 
         }
     }
+    
 }
 
 void Ui::SelectDraw(Item _item){

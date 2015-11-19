@@ -6,8 +6,8 @@
 
 class Stageselect : public Classbase{
 private:
-
-
+    int count;
+    bool is_ok;
 public:
 	Stageselect();
 

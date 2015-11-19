@@ -7,6 +7,7 @@
 class Title : public Classbase{
 
 private:
+    int count;
 
 
 public:
