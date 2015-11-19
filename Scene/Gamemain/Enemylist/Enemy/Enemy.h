@@ -12,6 +12,7 @@ protected:
 	int speed;
 	int number;
 	Item* heart;
+	Texture tx;
 public:
 	Enemy();
 	void Update();
@@ -24,6 +25,9 @@ public:
 	Vec2f GetSize();
 	Vec2f GetVPos();
 	int GetSpeed();
-	float GetCutX();
+	Direction GetDir();
+	Texture GetTx();
+	int GetAniCount();
 	void SetPos(Vec2f set);
+	void SetDirection(int dir);
 };
