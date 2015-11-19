@@ -18,6 +18,7 @@ private:
 	Vec2f _pos;
 	int count;
 	int enemy_number;
+	int a;
 public:
 	Gamemain();
 

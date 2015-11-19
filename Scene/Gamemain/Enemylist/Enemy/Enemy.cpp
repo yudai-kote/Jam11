@@ -19,13 +19,16 @@ void Enemy::Move(int astar_direction){
 		pos.y() += speed;
 		break;
 	case static_cast<int>(Direction::DOWN) :
-		pos.y() += speed;
+		pos.y() -= speed;
 		break;
 	case static_cast<int>(Direction::RIGHT) :
-		pos.x()+= speed;
+		pos.x() += speed;
 		break;
 	case static_cast<int>(Direction::LEFT) :
-		pos.x()-= speed;
+		pos.x() -= speed;
+		break;
+	case 5:
+
 		break;
 	}
 }

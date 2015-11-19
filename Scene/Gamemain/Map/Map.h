@@ -63,13 +63,16 @@ public:
 	void Editor(Item item, bool is_put = true);
 
 	void SetIsFillBox(bool is_box = true);
+	Vec2f CenteringEnemyPos(Vec2f enemy_pos);
+
+	bool DirectionChange(Vec2f enemy_pos, int enemy_speed);
 
 	Vec2f GetPlayerPos();
 	Vec2f GetEnemyPos();
 	Vec2f GetPlayerChip();
 	Vec2f GetEnemyChip();
 
-	Vec2f ChangeChip(Vec2f pos, Vec2f size);
+	Vec2f ChangeChip(Vec2f pos);
 
 	int GetCost();
 	std::vector<std::vector<int>> GetStatus();

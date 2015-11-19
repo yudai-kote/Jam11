@@ -300,7 +300,7 @@ Vec2f Map::GetPlayerChip(){
 		{
 			if (block[y][x].blocktype == PLAYER_START_POS)
 			{
-				return Vec2f(x,y);
+				return Vec2f(x, y);
 			}
 		}
 	}
@@ -314,6 +314,7 @@ Vec2f Map::GetEnemyChip(){
 		{
 			if (block[y][x].blocktype == ENEMY_START_POS)
 			{
+				//std::cout << Vec2f(x, y) << std::endl;
 				return Vec2f(x, y);
 			}
 		}
@@ -335,15 +336,46 @@ void Map::SetIsFillBox(bool is_box){
 }
 
 
-Vec2f Map::ChangeChip(Vec2f pos, Vec2f size){
+Vec2f Map::ChangeChip(Vec2f pos){
 	for (unsigned y = 0; y < block.size(); y++)
 	{
 		for (unsigned x = 0; x < block[y].size(); x++)
 		{
-			if (pointCollision(Vec2f(pos.x() + size.x() / 2, pos.y() + size.y() / 2), block_element[y][x].pos, block_element[y][x].size))
+			if (pointCollision(Vec2f(pos.x() + block_element[y][x].size.x() / 2, pos.y() + block_element[y][x].size.y() / 2), block_element[y][x].pos, block_element[y][x].size))
 			{
 				return Vec2f(x, y);
 			}
 		}
 	}
+}
+
+Vec2f Map::CenteringEnemyPos(Vec2f enemy_pos){
+	for (unsigned y = 0; y < block.size(); y++)
+	{
+		for (unsigned x = 0; x < block[y].size(); x++)
+		{
+
+			//drawPoint(block_element[y][x].pos.x(), block_element[y][x].pos.y(), 100, Color::cyan);
+			//drawPoint(enemy_pos.x(), enemy_pos.y(), 100, Color::cyan);
+
+			if (block_element[y][x].pos == Vec2i((float)enemy_pos.x(), (float)enemy_pos.y())){
+				return Vec2f(block_element[y][x].pos.x(), block_element[y][x].pos.y());
+			}
+		}
+	}
+	return null;
+
+}
+
+bool Map::DirectionChange(Vec2f enemy_pos, int enemy_speed){
+	for (unsigned y = 0; y < block.size(); y++)
+	{
+		for (unsigned x = 0; x < block[y].size(); x++)
+		{
+			if (block_element[y][x].pos == Vec2i((float)enemy_pos.x(), (float)enemy_pos.y())){
+				return true;
+			}
+		}
+	}
+	return false;
 }
