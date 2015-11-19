@@ -24,6 +24,7 @@ private:
     Texture robot;
     Texture comic;
     Texture floor;
+    Texture blackboard;
 
     void FloorDraw();
 

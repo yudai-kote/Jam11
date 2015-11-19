@@ -13,18 +13,21 @@ void Gamemain::Setup(){
     
 	count = 0;
 	enemy_number = 0;
-
+    astar.setMap(map.GetStatus());
 }
 
 void Gamemain::Update(){
 	int index;
 	count++;
-	index = (count) % 8;
+	index = (count) % 100;
 	if (index == 1){
 		enemy_number++;
 		if (enemy_number <= 5){
 			enemylist.PushEnemy(map.GetEnemyPos(),enemy_number);
 		}
+	}
+	for (int i = 0; i < enemy_number; i++){
+		
 	}
 	map.Update();
     player.SetSelectItem(ui.Select(player.GetSelectItem()));

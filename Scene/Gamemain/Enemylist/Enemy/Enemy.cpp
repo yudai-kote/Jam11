@@ -3,23 +3,24 @@
 Enemy::Enemy(){
 	size = Vec2f(100, 100);
 	direction = Direction::NONE;
+	speed = 2;
 }
 
 void Enemy::Move(Direction astar_direction){
-	float speed = 10;
+	
 	switch (astar_direction)
 	{
 	case Direction::UP:
-		pos.y()++;
+		pos.y() -= speed;
 		break;
 	case Direction::DOWN:
-		pos.y()--;
+		pos.y() += speed;
 		break;
 	case Direction::RIGHT:
-		pos.x()++;
+		pos.x()+= speed;
 		break;
 	case Direction::LEFT:
-		pos.x()--;
+		pos.x()-= speed;
 		break;
 	}
 }
@@ -36,6 +37,12 @@ Vec2f Enemy::GetSize(){
 	return size;
 }
 
+int Enemy::GetSpeed(){
+	return speed;
+}
+
 void Enemy::SetPos(Vec2f set){
-	pos = set;
+	if (set != null){
+		pos = set;
+	}
 }
