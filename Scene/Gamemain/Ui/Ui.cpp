@@ -24,7 +24,7 @@ void Ui::Setup(){
     for (int i = 0; i < static_cast<int>(Item::MAX); i++)
     {
         itemobject[i].size = Vec2f(100, 100);
-        itemobject[i].pos = Vec2f(350 + (i/5)*120, 120 - (i%5) * 120);
+        itemobject[i].pos = Vec2f(350 + (i / 5) * 120, 120 - (i % 5) * 120 - (i / 5)*240 + 70);
     }
     is_start = false;
     desk = Texture("res/Texture/desk.png");
@@ -54,7 +54,7 @@ void Ui::Draw(){
     }*/
     FloorDraw();
     drawTextureBox(WIDTH / 4, -HEIGHT / 2, WIDTH / 4, HEIGHT,
-        0, 80, 128, 340, blackboard);
+        0, 90, 128, 320, blackboard);
 
     for (int i = 0; i < static_cast<int>(Item::MAX); i++)
     {
@@ -72,7 +72,7 @@ void Ui::Draw(){
             break;
         case Item::ROBOT:
             drawTextureBox(itemobject[i].pos.x(), itemobject[i].pos.y(),
-                itemobject[i].size.x(), itemobject[i].size.y(), 0, 0, 512, 512,robot);
+                itemobject[i].size.x(), itemobject[i].size.y(), 0, 0, 512, 512, robot);
 
             break;
         case Item::COMIC:
@@ -82,10 +82,30 @@ void Ui::Draw(){
             break;
         case Item::GAME:
             drawTextureBox(itemobject[i].pos.x(), itemobject[i].pos.y(),
-                itemobject[i].size.x(), itemobject[i].size.y(), 0, 0, 512, 512,game);
+                itemobject[i].size.x(), itemobject[i].size.y(), 0, 0, 512, 512, game);
 
             break;
-        
+
+        case Item::ROBOT_EX:
+            drawTextureBox(itemobject[i].pos.x(), itemobject[i].pos.y(),
+                itemobject[i].size.x(), itemobject[i].size.y(),
+                0, 0, 512, 512, robot,Color::red);
+
+            break;
+        case Item::COMIC_EX:
+            drawTextureBox(itemobject[i].pos.x(), itemobject[i].pos.y(),
+                itemobject[i].size.x(), itemobject[i].size.y(),
+                0, 0, 512, 512, comic, Color::red);
+
+            break;
+        case Item::GAME_EX:
+            drawTextureBox(itemobject[i].pos.x(), itemobject[i].pos.y(),
+                itemobject[i].size.x(), itemobject[i].size.y(),
+                0, 0, 512, 512, game, Color::red);
+
+            break;
+
+
         default:
             /*std::cout <<
                 "x  " << itemobject[i].pos.x() <<
@@ -98,6 +118,7 @@ void Ui::Draw(){
 
         }
     }
+    FontStart();
 }
 
 void Ui::SelectDraw(Item _item){
@@ -131,5 +152,21 @@ void Ui::FloorDraw(){
         WIDTH * 3 / 4, HEIGHT,
         0, 0,
         1024, 1024, floor);
+}
+void Ui::FontStart(){
+    font.size(60);
+    Color a = Color::yellow;
+    if (collision(env.mousePosition(), Vec2f(WIDTH / 2 - font.drawSize("スタート").x() - 50,
+        -HEIGHT / 2 + 100), font.drawSize("スタート"))){
+        a = Color::red;
+        if (env.isPushButton(Mouse::LEFT)){
+
+
+        }
+    }
+
+    font.draw("スタート", Vec2f(WIDTH / 2 - font.drawSize("スタート").x() - 50,
+        -HEIGHT / 2+100)
+        ,a);
 }
 

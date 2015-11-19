@@ -11,7 +11,7 @@ public:
     void Cost(const int& cost);
     Item Select(Item _item);
     void SelectDraw(Item _item);
-
+    void CountDraw();
     bool is_start;
 
 private:
@@ -27,9 +27,9 @@ private:
     Texture blackboard;
 
     void FloorDraw();
+    void FontStart();
 
-
-    
+    int count;
     
 };
 
