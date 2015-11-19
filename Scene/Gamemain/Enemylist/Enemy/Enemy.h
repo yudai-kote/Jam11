@@ -4,6 +4,7 @@
 class Enemy{
 protected:
 	Vec2f pos;
+	Vec2f v_pos;
 	Vec2f size;
 	Direction direction;
 	int animation_count;
@@ -21,6 +22,7 @@ public:
 	int GetNum();
 	Vec2f GetPos();
 	Vec2f GetSize();
+	Vec2f GetVPos();
 	int GetSpeed();
 	float GetCutX();
 	void SetPos(Vec2f set);
