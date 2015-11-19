@@ -105,6 +105,16 @@ void Map::Editor(Item item, bool is_put){
 								block[y][x].GetItem() != Item::AIR &&
 								item > Item::DESK)
 							{
+								if (item >= Item::ROBOT_EX &&
+									block[y][x].GetItem() < Item::ROBOT_EX)
+								{
+									cost += item_cost - item_cost_ex;
+								}
+								if (item < Item::ROBOT_EX &&
+									block[y][x].GetItem() >= Item::ROBOT_EX)
+								{
+									cost += item_cost_ex - item_cost;
+								}
 								block[y][x].SetItem(item);
 							}
 							if (block[y][x].blocktype == DESK_BLOCK &&
@@ -112,12 +122,22 @@ void Map::Editor(Item item, bool is_put){
 								block[y][x].GetDesk() != Item::DESK&&
 								item > Item::DESK)
 							{
+								if (item >= Item::ROBOT_EX &&
+									block[y][x].GetItem() < Item::ROBOT_EX)
+								{
+									cost += item_cost - item_cost_ex;
+								}
+								if (item < Item::ROBOT_EX &&
+									block[y][x].GetItem() >= Item::ROBOT_EX)
+								{
+									cost += item_cost_ex - item_cost;
+								}
 								block[y][x].SetItem(item);
 							}
 							if (block[y][x].GetDesk() == Item::DESK&&
 								block[y][x].GetItem() == Item::AIR)
 							{
-								if (item > Item::ROBOT_EX)
+								if (item >= Item::ROBOT_EX)
 								{
 									if (cost >= item_cost_ex){
 										block[y][x].SetItem(item);
@@ -135,7 +155,7 @@ void Map::Editor(Item item, bool is_put){
 							if (block[y][x].blocktype == DESK_BLOCK&&
 								block[y][x].GetItem() == Item::AIR)
 							{
-								if (item > Item::ROBOT_EX)
+								if (item >= Item::ROBOT_EX)
 								{
 									if (cost >= item_cost_ex){
 										block[y][x].SetItem(item);
@@ -164,16 +184,26 @@ void Map::Editor(Item item, bool is_put){
 							if (block[y][x].GetDesk() == Item::DESK && item == Item::AIR)
 							{
 								cost += desk_cost;
-								if (block[y][x].GetItem() > Item::DESK)
+								if (block[y][x].GetItem() >= Item::ROBOT_EX)
+								{
+									cost += item_cost_ex;
+								}
+								else if (block[y][x].GetItem() > Item::DESK)
 								{
 									cost += item_cost;
 								}
 								block[y][x].SetItem(item);
 								block[y][x].SetDesk(item);
+
+
 							}
 							if (block[y][x].blocktype == DESK_BLOCK && item == Item::AIR)
 							{
-								if (block[y][x].GetItem() > Item::DESK)
+								if (block[y][x].GetItem() >= Item::ROBOT_EX)
+								{
+									cost += item_cost_ex;
+								}
+								else if (block[y][x].GetItem() > Item::DESK)
 								{
 									cost += item_cost;
 								}
