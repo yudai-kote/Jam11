@@ -84,6 +84,11 @@ void Ui::Draw(){
             break;
         
         default:
+            /*std::cout <<
+                "x  " << itemobject[i].pos.x() <<
+                "y  " << itemobject[i].pos.y()<<
+                "i  " <<i<< std::endl;*/
+            //font.draw(std::to_string(i))
             drawFillBox(itemobject[i].pos.x(), itemobject[i].pos.y(),
                 itemobject[i].size.x(), itemobject[i].size.y(), Color::white);
             break;
@@ -122,7 +127,6 @@ void Ui::FloorDraw(){
     drawTextureBox(WIDTH / 4, -HEIGHT / 2,
         WIDTH * 3 / 4, HEIGHT,
         0, 0,
-        1024, 1024, floor, 
-        Color(0.0f, 1.0f, 1.0f, 0.3f));
+        1024, 1024, floor);
 }
 
