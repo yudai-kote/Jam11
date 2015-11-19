@@ -12,10 +12,10 @@ public:
     Item Select(Item _item);
     void SelectDraw(Item _item);
 
-
+    bool is_start;
 
 private:
-    Font font = Font("res/meiryo.ttc");
+    Font font = Font("res/kokubanB.ttf");
     
     Object itemobject[static_cast<int>(Item::MAX)];
     //Texture comic;
@@ -23,6 +23,10 @@ private:
     Texture game;
     Texture robot;
     Texture comic;
+    Texture floor;
+    Texture blackboard;
+
+    void FloorDraw();
 
 
     

@@ -85,3 +85,5 @@ struct Object{
 	Vec2f zoom;
 	Vec2f center;
 };
+
+static Vec2f null = Vec2f(200000000, 200000000);

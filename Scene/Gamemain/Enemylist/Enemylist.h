@@ -15,5 +15,6 @@ public:
 	void Draw();
 	void Move(Direction direction, int i);
 	Vec2f GetPos(int i);
+	int GetSpeed(int i);
 	void SetPos(Vec2f set,int i);
 };

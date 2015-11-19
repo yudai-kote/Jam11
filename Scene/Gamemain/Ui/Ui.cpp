@@ -20,21 +20,23 @@ Ui::Ui()
 
 
 void Ui::Setup(){
-    font.size(100);
+    font.size(80);
     for (int i = 0; i < static_cast<int>(Item::MAX); i++)
     {
         itemobject[i].size = Vec2f(100, 100);
-        itemobject[i].pos = Vec2f(350 + (i/6)*120, 120 - (i%5) * 120);
+        itemobject[i].pos = Vec2f(350 + (i/5)*120, 120 - (i%5) * 120);
     }
-
+    is_start = false;
     desk = Texture("res/Texture/desk.png");
-    game = Texture("res/Texture/game.png");
-    robot = Texture("res/Texture/robot.png");
-    comic = Texture("res/Texture/comic.png");
+    game = Texture("res/Texture/vita.png");
+    robot = Texture("res/Texture/roboticon.png");
+    comic = Texture("res/Texture/comicicon.png");
+    floor = Texture("res/Texture/stage_classroom.png");
+    blackboard = Texture("res/Texture/blackboard.png");
 }
 void Ui::Cost(const int& cost){
     font.draw("コスト　" , Vec2f(WIDTH / 4, HEIGHT / 2-100),Color::white);
-    font.draw(std::to_string(cost), Vec2f(WIDTH / 2 - font.drawSize(std::to_string(cost)).x(),
+    font.draw(std::to_string(cost), Vec2f(WIDTH / 2 - font.drawSize(std::to_string(cost)).x()-30,
         HEIGHT / 2 - 200), Color::white);
 
 }
@@ -50,6 +52,9 @@ void Ui::Draw(){
                 WIDTH * 3 / 4 / 8, HEIGHT / 8,100,Color::white);
         }
     }*/
+    FloorDraw();
+    drawTextureBox(WIDTH / 4, -HEIGHT / 2, WIDTH / 4, HEIGHT,
+        0, 80, 128, 340, blackboard);
 
     for (int i = 0; i < static_cast<int>(Item::MAX); i++)
     {
@@ -82,13 +87,17 @@ void Ui::Draw(){
             break;
         
         default:
+            /*std::cout <<
+                "x  " << itemobject[i].pos.x() <<
+                "y  " << itemobject[i].pos.y()<<
+                "i  " <<i<< std::endl;*/
+            //font.draw(std::to_string(i))
             drawFillBox(itemobject[i].pos.x(), itemobject[i].pos.y(),
                 itemobject[i].size.x(), itemobject[i].size.y(), Color::white);
             break;
 
         }
     }
-    
 }
 
 void Ui::SelectDraw(Item _item){
@@ -117,4 +126,10 @@ Item Ui::Select(Item _item){
     return _item;
 }
 
+void Ui::FloorDraw(){
+    drawTextureBox(WIDTH / 4, -HEIGHT / 2,
+        WIDTH * 3 / 4, HEIGHT,
+        0, 0,
+        1024, 1024, floor);
+}
 
