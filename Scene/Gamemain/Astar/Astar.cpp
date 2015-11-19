@@ -25,7 +25,7 @@ void Astar::setup(Vec2f enemy_pos, Vec2f player_pos){
 
 	_enemy_pos = Vec2i((float)enemy_pos.x(), (float)enemy_pos.y());
 	_player_pos = Vec2i((float)player_pos.x(), (float)player_pos.y());
-
+	
 	map[_player_pos.y()][_player_pos.x()].search = OPEN;
 
 	enemy_start_parent = 5;
@@ -34,6 +34,9 @@ void Astar::setup(Vec2f enemy_pos, Vec2f player_pos){
 
 
 int Astar::nowCost(Vec2i _player_pos){
+	//std::cout <<"AAAAAAAAAAA" <<  std::abs(_enemy_pos.x() - _player_pos.x()) + std::abs(_enemy_pos.y() - _player_pos.y()) << std::endl;
+	//std::cout <<_player_pos << std::endl;
+	//std::cout << _enemy_pos << std::endl;
 	return std::abs(_enemy_pos.x() - _player_pos.x()) + std::abs(_enemy_pos.y() - _player_pos.y());
 }
 
@@ -186,7 +189,7 @@ int Astar::getParentPlayer(){
 	{
 		return enemy_start_parent;
 	}
-
+	//std::cout << "エネミーの向き" << map[_enemy_pos.y()][_enemy_pos.x()].parent << std::endl;
 	switch (map[_enemy_pos.y()][_enemy_pos.x()].parent)
 	{
 	case static_cast<int>(Direction::UP) :
@@ -213,6 +216,8 @@ void Astar::setEnemyPos(Vec2f enemy_pos){
 
 	_enemy_pos = Vec2i((float)enemy_pos.x(), (float)enemy_pos.y());
 	enemy_end_pos = Vec2i((float)enemy_pos.x(), (float)enemy_pos.y());
+
+
 }
 
 void Astar::setPlayerPos(Vec2f player_pos){
