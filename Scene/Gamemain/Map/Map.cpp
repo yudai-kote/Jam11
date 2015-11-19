@@ -15,9 +15,9 @@ Map::Map(){
 		file_list[index] = std::ifstream(file_name[index]);
 	}
 
-	for (int y = 0; y < block.size(); y++)
+	for (unsigned y = 0; y < block.size(); y++)
 	{
-		for (int x = 0; x < block[y].size(); x++)
+		for (unsigned x = 0; x < block[y].size(); x++)
 		{
 			file_list[STAGE1] >> block[y][x].blocktype;
 			block_element[y][x].size = Vec2i(WIDTH * 3 / 4 / block.size(), HEIGHT / block.size());
@@ -61,25 +61,14 @@ void Map::Draw(){
 				   0, 0,
 				   1024, 1024,
 				   *tex_list[FLOOR], Color::white);
-	//std::ifstream a = std::ifstream("res/Map_file/stage1.txt");
-	
-	for (int y = 0; y < block.size(); y++)
+
+	for (unsigned y = 0; y < block.size(); y++)
 	{
-		for (int x = 0; x < block[y].size(); x++)
+		for (unsigned x = 0; x < block[y].size(); x++)
 		{
 			file_list[STAGE1] >> block[y][x].blocktype;
-			//a >> block[y][x].blocktype;
+
 			block[y][x].Draw();
-			//block[0][0].blocktype = 1;
-			if (block[y][x].blocktype == DESK_BLOCK)
-			{
-				drawTextureBox(block_element[y][x].pos.x(), block_element[y][x].pos.y(),
-							   block_element[y][x].size.x(), block_element[y][x].size.y(),
-							   0, 0,
-							   512, 512,
-							   *tex_list[TEX_DESK],
-							   Color::red);
-			}
 		}
 	}
 
@@ -88,34 +77,54 @@ void Map::Draw(){
 void Map::Editor(Item item, bool is_put){
 
 
-	for (int y = 0; y < block.size(); y++)
+	for (unsigned y = 0; y < block.size(); y++)
 	{
-		for (int x = 0; x < block[y].size(); x++)
+		for (unsigned x = 0; x < block[y].size(); x++)
 		{
-			block[y][x].SetColor(Color(1, 1, 1, 0.3));
+			block[y][x].SetColor(Color(1.0f, 1.0f, 1.0f, 0.3f));
 			if (pointCollision(env.mousePosition(), block_element[y][x].pos, block_element[y][x].size) == true)
 			{
-				block[y][x].SetColor(Color(0.0f, 1.0f, 1.0f, 0.3));
+				block[y][x].SetColor(Color(0.0f, 1.0f, 1.0f, 0.3f));
 				if (is_put == true)
 				{
 					if (env.isPushButton(Mouse::LEFT))
 					{
 						if (block[y][x].blocktype != PLAYER_START_POS&&
-							block[y][x].blocktype != ENEMY_START_POS&&
-							block[y][x].blocktype != DESK_BLOCK)
+							block[y][x].blocktype != ENEMY_START_POS)
 						{
 							if (block[y][x].GetItem() == Item::AIR && item == Item::DESK)
 							{
 								block[y][x].SetDesk(item);
+								cost -= desk_cost;
 							}
-							if (block[y][x].GetDesk() == Item::DESK && item != Item::DESK)
+							if (block[y][x].GetDesk() == Item::DESK ||
+								block[y][x].blocktype == DESK_BLOCK&&
+								item != Item::DESK)
 							{
 								block[y][x].SetItem(item);
+								if (item > Item::ROBOT_EX)
+								{
+									cost -= item_cost_ex;
+								}
+								else
+								{
+									cost -= item_cost;
+								}
 							}
+
 							if (block[y][x].GetDesk() == Item::DESK && item == Item::AIR)
 							{
 								block[y][x].SetItem(item);
 								block[y][x].SetDesk(item);
+								cost += desk_cost;
+								if (item > Item::ROBOT_EX)
+								{
+									cost += item_cost_ex;
+								}
+								else
+								{
+									cost += item_cost;
+								}
 							}
 						}
 					}
@@ -141,9 +150,9 @@ bool Map::pointCollision(Vec2f point_pos, Vec2i box_pos, Vec2i box_size){
 
 void Map::ChangeBlock(){
 
-	for (int y = 0; y < block.size(); y++)
+	for (unsigned y = 0; y < block.size(); y++)
 	{
-		for (int x = 0; x < block[y].size(); x++)
+		for (unsigned x = 0; x < block[y].size(); x++)
 		{
 			file_list[STAGE1] >> block[y][x].blocktype;
 
@@ -170,9 +179,9 @@ void Map::ChangeBlock(){
 }
 
 Vec2f Map::GetPlayerPos(){
-	for (int y = 0; y < block.size(); y++)
+	for (unsigned y = 0; y < block.size(); y++)
 	{
-		for (int x = 0; x < block[y].size(); x++)
+		for (unsigned x = 0; x < block[y].size(); x++)
 		{
 			if (block[y][x].blocktype == PLAYER_START_POS)
 			{
@@ -181,12 +190,13 @@ Vec2f Map::GetPlayerPos(){
 			}
 		}
 	}
+	return Vec2f(0.0f, 0.0f);
 }
 
 Vec2f Map::GetEnemyPos(){
-	for (int y = 0; y < block.size(); y++)
+	for (unsigned y = 0; y < block.size(); y++)
 	{
-		for (int x = 0; x < block[y].size(); x++)
+		for (unsigned x = 0; x < block[y].size(); x++)
 		{
 			if (block[y][x].blocktype == ENEMY_START_POS)
 			{
@@ -195,4 +205,10 @@ Vec2f Map::GetEnemyPos(){
 			}
 		}
 	}
+	return Vec2f(0.0f, 0.0f);
+}
+
+
+int Map::GetCost(){
+	return cost;
 }
