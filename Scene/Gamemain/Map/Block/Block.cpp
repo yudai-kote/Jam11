@@ -32,11 +32,13 @@ void Block::Draw(){
 					   Color::red);
 	}
 	switch (category){
-	case Item::AIR:
-
-		break;
-	case Item::DESK:
-
+	case Item::ROBOT:
+		drawTextureBox(block.pos.x(), block.pos.y(),
+					   block.size.x(), block.size.y(),
+					   block.offset_pos.x(), block.offset_pos.y(),
+					   block.offset_size.x(), block.offset_size.y(),
+					   *tex_list[ROBOT],
+					   Color::white);
 		break;
 	case Item::COMIC:
 		drawTextureBox(block.pos.x(), block.pos.y(),
@@ -54,14 +56,31 @@ void Block::Draw(){
 					   *tex_list[GAME],
 					   Color::white);
 		break;
-	case Item::ROBOT:
+	case Item::ROBOT_EX:
 		drawTextureBox(block.pos.x(), block.pos.y(),
 					   block.size.x(), block.size.y(),
 					   block.offset_pos.x(), block.offset_pos.y(),
 					   block.offset_size.x(), block.offset_size.y(),
 					   *tex_list[ROBOT],
-					   Color::white);
+					   Color::red);
 		break;
+	case Item::COMIC_EX:
+		drawTextureBox(block.pos.x(), block.pos.y(),
+					   block.size.x(), block.size.y(),
+					   block.offset_pos.x(), block.offset_pos.y(),
+					   block.offset_size.x(), block.offset_size.y(),
+					   *tex_list[COMIC],
+					   Color::red);
+		break;
+	case Item::GAME_EX:
+		drawTextureBox(block.pos.x(), block.pos.y(),
+					   block.size.x(), block.size.y(),
+					   block.offset_pos.x(), block.offset_pos.y(),
+					   block.offset_size.x(), block.offset_size.y(),
+					   *tex_list[GAME],
+					   Color::red);
+		break;
+	
 	}
 	
 	
