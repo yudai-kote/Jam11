@@ -2,9 +2,9 @@
 
 Map::Map(){
 
-	block = std::vector<std::vector<Block>>(LENGTH, std::vector<Block>(WIDE));
-	one_or_zero = std::vector<std::vector<int>>(LENGTH, std::vector<int>(WIDE));
-	block_element = std::vector<std::vector<Element>>(LENGTH, std::vector<Element>(WIDE));
+	block = std::vector<std::vector<Block>>(static_cast<int>(Block_size::LENGTH), std::vector<Block>(static_cast<int>(Block_size::WIDE)));
+	one_or_zero = std::vector<std::vector<int>>(static_cast<int>(Block_size::LENGTH), std::vector<int>(static_cast<int>(Block_size::WIDE)));
+	block_element = std::vector<std::vector<Element>>(static_cast<int>(Block_size::LENGTH), std::vector<Element>(static_cast<int>(Block_size::WIDE)));
 
 	const char* file_name[FILE_MAX]
 	{

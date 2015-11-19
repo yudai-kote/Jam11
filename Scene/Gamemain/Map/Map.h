@@ -17,11 +17,6 @@ private:
 		TEXTURE_MAX,
 	};
 
-	enum Mapchipsize{
-		LENGTH = 8,
-		WIDE = 8,
-	};
-
 	enum Chiptype{
 		DESK_BLOCK = '1',
 		PLAYER_START_POS = '2',
