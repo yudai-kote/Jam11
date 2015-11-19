@@ -15,7 +15,7 @@ private:
     Player player;
 	Map map;
 	Enemylist enemylist;
-	Astar astar;
+	
 	int count;
 	int enemy_number;
 public:
