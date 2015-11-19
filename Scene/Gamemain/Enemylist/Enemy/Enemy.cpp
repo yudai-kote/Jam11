@@ -1,34 +1,33 @@
 #include "Enemy.h"
 
 Enemy::Enemy(){
-	size = Vec2f(100, 100);
+	size = Vec2f(120, 120);
 	direction = Direction::UP;
 	speed = 2;
 	animation_count = 0;
+	cut_x = 0;
 }
 void Enemy::Animation(){
 	animation_count++;
-	int index = (animation_count) % 40;
-	float x = (index) % 8 * 512.0f;
-
 }
 void Enemy::Move(int astar_direction){
 	switch (astar_direction)
 	{
 	case static_cast<int>(Direction::UP):
 		pos.y() += speed;
+		direction = Direction::UP;
 		break;
 	case static_cast<int>(Direction::DOWN) :
-		pos.y() -= speed;
+		pos.y() += speed;
+		direction = Direction::DOWN;
 		break;
 	case static_cast<int>(Direction::RIGHT) :
-		pos.x() += speed;
+		pos.x()+= speed;
+		direction = Direction::RIGHT;
 		break;
 	case static_cast<int>(Direction::LEFT) :
-		pos.x() -= speed;
-		break;
-	case 5:
-
+		pos.x()-= speed;
+		direction = Direction::LEFT;
 		break;
 	}
 }
@@ -53,8 +52,22 @@ int Enemy::GetSpeed(){
 	return speed;
 }
 
+Texture Enemy::GetTx(){
+	return tx;
+}
+
+int Enemy::GetAniCount(){
+	return animation_count;
+}
+Direction Enemy::GetDir(){
+	return direction;
+}
+
 void Enemy::SetPos(Vec2f set){
 	if (set != null){
 		pos = set;
 	}
+}
+void Enemy::SetDirection(int dir){
+	this->direction = static_cast<Direction>(dir);
 }

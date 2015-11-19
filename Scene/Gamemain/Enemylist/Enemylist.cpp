@@ -6,16 +6,23 @@ Enemylist::Enemylist(){
 	stage[2] = { Item::COMIC };
 	stage[3] = { Item::COMIC };
 	stage[4] = { Item::ROBOT };
-
+	
 }
 
 
 
 void Enemylist::PushEnemy(Vec2f pos, int count,Vec2f v_pos){
-
-		l_enemy.push_back(new Gal(stage[count], count,pos,v_pos));
-		
-	
+	switch (Rand_::get()(0, 2)){
+	case 0:
+		l_enemy.push_back(new Gal(stage[count], count, pos, v_pos));
+		break;
+	case 1:
+		l_enemy.push_back(new Morals(stage[count], count, pos, v_pos));
+		break;
+	case 2:
+		l_enemy.push_back(new Baseclub(stage[count], count, pos, v_pos));
+		break;
+	}
 }
 
 void Enemylist::Move(int direction, int i){
@@ -23,8 +30,9 @@ void Enemylist::Move(int direction, int i){
 	{
 		if (i == (*itr)->GetNum()){
 			(*itr)->Move(direction);
+			(*itr)->Animation();
 		}
-		(*itr)->Animation();
+		
 	}
 }
 
@@ -64,11 +72,15 @@ void Enemylist::SetPos(Vec2f set, int i){
 	}
 }
 
-void Enemylist::Draw(){
+void Enemylist::Draw(int i){
 	for (auto itr = l_enemy.begin(); itr != l_enemy.end(); ++itr)
 	{
-		drawFillBox((*itr)->GetPos().x(), (*itr)->GetPos().y(), (*itr)->GetSize().x(),
-			(*itr)->GetSize().y(), Color::white);
+		if (i == (*itr)->GetNum()){
+			drawTextureBox((*itr)->GetPos().x(), (*itr)->GetPos().y(), (*itr)->GetSize().x(),
+				(*itr)->GetSize().y(), (*itr)->GetAniCount() / 12 % 4 * 512, 0, 512, 512, (*itr)->GetTx(), Color::white);
+			
+			
+		}
 	}
 	
 }
