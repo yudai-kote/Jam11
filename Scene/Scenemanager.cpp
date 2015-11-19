@@ -5,8 +5,14 @@ Scenemanager::Scenemanager(){
 }
 
 void Scenemanager::Setup(){
-	scenechange = Scenename::GAMEMAIN;
+	scenechange = Scenename::RESULT;
+
+    title.Setup();
+    ////Ç±Ç±ÇÕç≈å„Ç…çÌèúÇ∑ÇÈÇÊÇ§Ç…
     gamemanager.Setup();
+    result.Setup();
+    stageselect.Setup();
+
 }
 
 
@@ -27,6 +33,10 @@ void Scenemanager::Update(){
 	case Scenename::GAMEMAIN:
         gamemanager.Update();
 		break;
+    case Scenename::RESULT:
+        result.Update();
+
+        break;
 	}
 }
 
@@ -45,25 +55,46 @@ void Scenemanager::Draw(){
 	case Scenename::GAMEMAIN:
         gamemanager.Draw();
 		break;
+    case Scenename::RESULT:
+        result.Draw();
+
+        break;
 	}
 }
 
 
 void Scenemanager::Shift(){
 
-	switch (scenechange){
-	case Scenename::TITLE:
-		scenechange = title.Shift();
+    switch (scenechange){
+    case Scenename::TITLE:
+        scenechange = title.Shift();
+        if (scenechange != Scenename::TITLE){
+            stageselect.Setup();
+        }
+        break;
+    case Scenename::STAGESELECT:
 
-		break;
-	case Scenename::STAGESELECT:
+        scenechange = stageselect.Shift();
+        if (scenechange != Scenename::STAGESELECT){
+            gamemanager.Setup();
+        }
 
-		scenechange = stageselect.Shift();
-		break;
+        break;
 
-	case Scenename::GAMEMAIN:
-		scenechange = gamemanager.Shift();
+    case Scenename::GAMEMAIN:
+        scenechange = gamemanager.Shift();
+        if (scenechange != Scenename::TITLE){
+            result.Setup();
+            //result.SetWin();
+        }
+        break;
 
-		break;
-	}
+    case Scenename::RESULT:
+        scenechange = result.Shift();
+        if (scenechange != Scenename::TITLE){
+            title.Setup();
+        }
+        break;
+    }
 }
+

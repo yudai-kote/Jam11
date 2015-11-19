@@ -5,6 +5,7 @@
 #include "Stageselect/Stageselect.h"
 #include "Gamemain/Gamemain.h"
 #include "../Classbase.h"
+#include "Result/Result.h"
 
 class Scenemanager : public Classbase{
 private:
@@ -12,6 +13,8 @@ private:
 	Title title;
 	Gamemain gamemanager;
 	Stageselect stageselect;
+    Result result;
+
 	Scenename scenechange;
 
 	
