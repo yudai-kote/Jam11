@@ -2,7 +2,7 @@
 
 Gamemain::Gamemain(){
 
-
+	
     Setup();
 }
 
@@ -10,10 +10,10 @@ Gamemain::Gamemain(){
 void Gamemain::Setup(){
 	map.Setup();
     player.SetPos(map.GetPlayerPos());
-    
 	count = 0;
 	enemy_number = 0;
     Astar::get().setMap(map.GetStatus());
+	Astar::get().setup(Vec2f(0, 7), Vec2f(0,0));
     ui.Setup();
 }
 
@@ -24,13 +24,14 @@ void Gamemain::Update(){
 	if (index == 1){
 		enemy_number++;
 		if (enemy_number <= 5){
-			enemylist.PushEnemy(map.GetEnemyPos(),enemy_number);
+			enemylist.PushEnemy(map.GetEnemyPos(), enemy_number, Vec2f(0, 7));
 		}
 	}
 	for (int i = 0; i < enemy_number; i++){
-		Astar::get().setEnemyPos(enemylist.GetPos(i));
-		Astar::get().setPlayerPos(map.GetPlayerPos());
-		enemylist.Move(static_cast<int>(Direction::DOWN),i);
+		enemylist.Move(Astar::get().getParentPlayer(), i);
+		Astar::get().setEnemyPos(enemylist.GetVPos(i));
+		Astar::get().setPlayerPos(Vec2f(0,0));
+		Astar::get().update();
 	}
 	map.Update();
     player.SetSelectItem(ui.Select(player.GetSelectItem()));
