@@ -34,7 +34,7 @@ void Gamemain::Update(){
 
 void Gamemain::Draw(){
     ui.Draw();
-    ui.Cost(player.GetCost());
+    ui.Cost(map.GetCost());
     ui.SelectDraw(player.GetSelectItem());
 	map.Draw();
     player.Draw();
