@@ -15,7 +15,7 @@ private:
     Player player;
 	Map map;
 	Enemylist enemylist;
-	
+	Vec2f _pos;
 	int count;
 	int enemy_number;
 public:

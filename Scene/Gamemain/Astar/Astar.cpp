@@ -9,10 +9,10 @@ Astar::Astar(){
 
 void Astar::setup(Vec2f enemy_pos, Vec2f player_pos){
 
-	enemy_pos.x() = enemy_pos.x() / (WIDTH * 3 / 4 / static_cast<int>(Block_size::WIDE));
-	enemy_pos.y() = enemy_pos.y() / (HEIGHT / static_cast<int>(Block_size::LENGTH));
-	player_pos.x() = player_pos.x() / (WIDTH * 3 / 4 / static_cast<int>(Block_size::WIDE));
-	player_pos.y() = player_pos.y() / (HEIGHT / static_cast<int>(Block_size::LENGTH));
+	enemy_pos.x() = enemy_pos.x();
+	enemy_pos.y() = enemy_pos.y();
+	player_pos.x() = player_pos.x();
+	player_pos.y() = player_pos.y();
 
 	for (int y = 0; y < map.size(); y++)
 	{
@@ -202,22 +202,22 @@ int Astar::getParentPlayer(){
 		return map[_enemy_pos.y()][_enemy_pos.x()].parent;
 		break;
 	}
-
+	return 5;
 }
 
 
 void Astar::setEnemyPos(Vec2f enemy_pos){
 
-	enemy_pos.x() = enemy_pos.x() / (WIDTH * 3 / 4 / static_cast<int>(Block_size::WIDE));
-	enemy_pos.y() = enemy_pos.y() / (HEIGHT / static_cast<int>(Block_size::LENGTH));
+	enemy_pos.x() = enemy_pos.x();
+	enemy_pos.y() = enemy_pos.y();
 
 	_enemy_pos = Vec2i((float)enemy_pos.x(), (float)enemy_pos.y());
 	enemy_end_pos = Vec2i((float)enemy_pos.x(), (float)enemy_pos.y());
 }
 
 void Astar::setPlayerPos(Vec2f player_pos){
-	player_pos.x() = player_pos.x() / (WIDTH * 3 / 4 / static_cast<int>(Block_size::WIDE));
-	player_pos.y() = player_pos.y() / (HEIGHT / static_cast<int>(Block_size::LENGTH));
+	player_pos.x() = player_pos.x() ;
+	player_pos.y() = player_pos.y() ;
 	_player_pos = Vec2i((float)player_pos.x(), (float)player_pos.y());
 }
 

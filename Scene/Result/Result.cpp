@@ -12,8 +12,8 @@ void Result::Setup()
    /* win = Texture("res/");
     loos = Texture("res/");
 */
-    loosse = Media("res/Media/Result/lost.wav");
-    winse = Media("res/Media/Result/win.wav");
+    loosse = Media("res/Media/BGM/Result/lost.wav");
+    winse = Media("res/Media/SE/");
 }
 
 void Result::Update(){
