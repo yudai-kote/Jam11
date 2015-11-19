@@ -11,9 +11,9 @@ Enemylist::Enemylist(){
 
 
 
-void Enemylist::PushEnemy(Vec2f pos, int count){
+void Enemylist::PushEnemy(Vec2f pos, int count,Vec2f v_pos){
 
-		l_enemy.push_back(new Gal(stage[count], count,pos));
+		l_enemy.push_back(new Gal(stage[count], count,pos,v_pos));
 		
 	
 }
@@ -45,6 +45,15 @@ int Enemylist::GetSpeed(int i){
 		 }
 	 }
  }
+
+Vec2f Enemylist::GetVPos(int i){
+	for (auto itr = l_enemy.begin(); itr != l_enemy.end(); ++itr)
+	{
+		if (i == (*itr)->GetNum()){
+			return (*itr)->GetVPos();
+		}
+	}
+}
 
 void Enemylist::SetPos(Vec2f set, int i){
 	for (auto itr = l_enemy.begin(); itr != l_enemy.end(); ++itr)

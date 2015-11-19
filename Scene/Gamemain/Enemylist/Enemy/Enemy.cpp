@@ -2,7 +2,7 @@
 
 Enemy::Enemy(){
 	size = Vec2f(100, 100);
-	direction = Direction::NONE;
+	direction = Direction::UP;
 	speed = 2;
 	animation_count = 0;
 }
@@ -40,6 +40,10 @@ Vec2f Enemy::GetPos(){
 
 Vec2f Enemy::GetSize(){
 	return size;
+}
+
+Vec2f Enemy::GetVPos(){
+	return v_pos;
 }
 
 int Enemy::GetSpeed(){
