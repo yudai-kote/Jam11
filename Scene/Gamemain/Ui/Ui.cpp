@@ -26,13 +26,14 @@ void Ui::Setup(){
         itemobject[i].size = Vec2f(100, 100);
         itemobject[i].pos = Vec2f(350 + (i / 5) * 120, 120 - (i % 5) * 120 - (i / 5)*240 + 70);
     }
-    is_start = false;
+    
     desk = Texture("res/Texture/desk.png");
     game = Texture("res/Texture/vita.png");
     robot = Texture("res/Texture/roboticon.png");
     comic = Texture("res/Texture/comicicon.png");
     floor = Texture("res/Texture/stage_classroom.png");
     blackboard = Texture("res/Texture/blackboard.png");
+    count = 181;
 }
 void Ui::Cost(const int& cost){
     font.draw("コスト　" , Vec2f(WIDTH / 4, HEIGHT / 2-100),Color::white);
@@ -119,6 +120,9 @@ void Ui::Draw(){
         }
     }
     FontStart();
+    if (count < 181 && count > 0){
+        count--;
+    }
 }
 
 void Ui::SelectDraw(Item _item){
@@ -160,13 +164,25 @@ void Ui::FontStart(){
         -HEIGHT / 2 + 100), font.drawSize("スタート"))){
         a = Color::red;
         if (env.isPushButton(Mouse::LEFT)){
-
-
+            if (count == 181)
+            count--;
         }
     }
-
+    
     font.draw("スタート", Vec2f(WIDTH / 2 - font.drawSize("スタート").x() - 50,
         -HEIGHT / 2+100)
         ,a);
+}
+
+
+bool Ui::IsStart(){
+    return count == 0;
+}
+
+void Ui::CountDraw(){
+    font.size(100);
+    if (count > 0 && count <181)
+        font.draw(std::to_string(count / 60), Vec2f(0, 0), Color::yellow);
+
 }
 
