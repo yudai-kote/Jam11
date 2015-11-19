@@ -32,7 +32,7 @@ public:
 		block.offset_size = Vec2f(512.0f, 512.0f);
 		block.zoom = Vec2f(1.0f, 1.0f);
 		block.center = Vec2f(0.0f, 0.0f);
-		block.color = Color(1, 1, 1, 0.3);
+		block.color = Color(1.0f, 1.0f, 1.0f, 0.3f);
 		block.angle = 0;
 		category = Item::AIR;
 		is_desk = Item::AIR;
