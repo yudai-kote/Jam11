@@ -2,7 +2,7 @@
 
 Astar::Astar(){
 
-
+	map = std::vector<std::vector<MapChip>>(LENGTH, std::vector<MapChip>(WIDE));
 }
 
 
