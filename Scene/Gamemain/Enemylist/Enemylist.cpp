@@ -25,6 +25,15 @@ void Enemylist::PushEnemy(Vec2f pos, int count){
 	}
 }
 
+int Enemylist::GetSpeed(int i){
+	 for (auto itr = l_enemy.begin(); itr != l_enemy.end(); ++itr)
+	 {
+		 if (i == (*itr)->GetNum()){
+			 return (*itr)->GetSpeed();
+		 }
+	 }
+ }
+
 void Enemylist::SetPos(Vec2f set, int i){
 	for (auto itr = l_enemy.begin(); itr != l_enemy.end(); ++itr)
 	{
