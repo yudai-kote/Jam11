@@ -93,28 +93,31 @@ void Map::Editor(Item item, bool is_put){
 							block[y][x].blocktype != ENEMY_START_POS)
 						{
 							
-							if (block[y][x].GetItem() == Item::AIR && item == Item::DESK)
+							if (block[y][x].GetItem() == Item::AIR &&
+								block[y][x].GetDesk() != Item::DESK&&
+								item == Item::DESK)
 							{
-								if (cost > desk_cost)
+								if (cost >= desk_cost)
 								{
 									block[y][x].SetDesk(item);
 									cost -= desk_cost;
 								}
 							}
 							if (block[y][x].GetDesk() == Item::DESK ||
+								block[y][x].GetItem() == Item::AIR&&
 								block[y][x].blocktype == DESK_BLOCK&&
 								item != Item::DESK)
 							{
 								if (item > Item::ROBOT_EX)
 								{
-									if (cost > item_cost_ex){
+									if (cost >= item_cost_ex){
 										block[y][x].SetItem(item);
 										cost -= item_cost_ex;
 									}
 								}
 								else
 								{
-									if (cost > item_cost){
+									if (cost >= item_cost){
 										block[y][x].SetItem(item);
 										cost -= item_cost;
 									}
