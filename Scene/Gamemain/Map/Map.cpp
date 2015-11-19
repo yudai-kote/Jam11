@@ -69,6 +69,14 @@ void Map::Draw(){
 			file_list[STAGE1] >> block[y][x].blocktype;
 
 			block[y][x].Draw();
+			if (pointCollision(env.mousePosition(), block_element[y][x].pos, block_element[y][x].size) == true)
+			{
+				if (is_fillbox == true){
+					drawFillBox(block_element[y][x].pos.x(), block_element[y][x].pos.y(),
+								block_element[y][x].size.x(), block_element[y][x].size.y(),
+								Color(0.0f, 1.0f, 1.0f, 0.3f));
+				}
+			}
 		}
 	}
 
@@ -92,21 +100,16 @@ void Map::Editor(Item item, bool is_put){
 						if (block[y][x].blocktype != PLAYER_START_POS&&
 							block[y][x].blocktype != ENEMY_START_POS)
 						{
-							
-							if (block[y][x].GetItem() == Item::AIR &&
-								block[y][x].GetDesk() != Item::DESK&&
-								item == Item::DESK)
-							{
-								if (cost >= desk_cost)
-								{
-									block[y][x].SetDesk(item);
-									cost -= desk_cost;
-								}
-							}
+
 							if (block[y][x].GetDesk() == Item::DESK ||
-								block[y][x].GetItem() == Item::AIR&&
-								block[y][x].blocktype == DESK_BLOCK&&
-								item != Item::DESK)
+								block[y][x].blocktype == DESK_BLOCK &&
+								block[y][x].GetItem() == Item::AIR)
+							{
+									block[y][x].SetItem(item);
+							}
+
+							if (block[y][x].GetDesk() == Item::DESK&&
+								block[y][x].GetItem() == Item::AIR)
 							{
 								if (item > Item::ROBOT_EX)
 								{
@@ -115,7 +118,7 @@ void Map::Editor(Item item, bool is_put){
 										cost -= item_cost_ex;
 									}
 								}
-								else
+								else if (item > Item::DESK)
 								{
 									if (cost >= item_cost){
 										block[y][x].SetItem(item);
@@ -123,21 +126,65 @@ void Map::Editor(Item item, bool is_put){
 									}
 								}
 							}
-
+							if (block[y][x].blocktype == DESK_BLOCK&&
+								block[y][x].GetItem() == Item::AIR)
+							{
+								if (item > Item::ROBOT_EX)
+								{
+									if (cost >= item_cost_ex){
+										block[y][x].SetItem(item);
+										cost -= item_cost_ex;
+									}
+								}
+								else if (item > Item::DESK)
+								{
+									if (cost >= item_cost){
+										block[y][x].SetItem(item);
+										cost -= item_cost;
+									}
+								}
+							}
+							if (block[y][x].GetItem() == Item::AIR &&
+								block[y][x].GetDesk() == Item::AIR&&
+								block[y][x].blocktype != DESK_BLOCK&&
+								item == Item::DESK)
+							{
+								if (cost >= desk_cost)
+								{
+									block[y][x].SetDesk(item);
+									cost -= desk_cost;
+								}
+							}
 							if (block[y][x].GetDesk() == Item::DESK && item == Item::AIR)
 							{
-								block[y][x].SetItem(item);
-								block[y][x].SetDesk(item);
+
 								cost += desk_cost;
-								if (item > Item::ROBOT_EX)
+								if (block[y][x].GetItem() > Item::ROBOT_EX)
 								{
 									cost += item_cost_ex;
 								}
-								else
+								else if (block[y][x].GetItem() > Item::DESK)
 								{
 									cost += item_cost;
 								}
+								block[y][x].SetItem(item);
+								block[y][x].SetDesk(item);
 							}
+							if (block[y][x].blocktype == DESK_BLOCK && item == Item::AIR)
+							{
+
+								if (block[y][x].GetItem() > Item::ROBOT_EX)
+								{
+									cost += item_cost_ex;
+								}
+								else if (block[y][x].GetItem() > Item::DESK)
+								{
+									cost += item_cost;
+								}
+								block[y][x].SetItem(item);
+								block[y][x].SetDesk(item);
+							}
+
 						}
 					}
 				}
@@ -223,4 +270,12 @@ Vec2f Map::GetEnemyPos(){
 
 int Map::GetCost(){
 	return cost;
+}
+
+std::vector<std::vector<int>> Map::GetStatus(){
+	return one_or_zero;
+}
+
+void Map::SetIsFillBox(bool is_box){
+	is_fillbox = is_box;
 }

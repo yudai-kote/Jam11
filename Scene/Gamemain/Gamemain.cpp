@@ -13,7 +13,7 @@ void Gamemain::Setup(){
     
 	count = 0;
 	enemy_number = 0;
-
+    astar.setMap(map.GetStatus());
 }
 
 void Gamemain::Update(){
