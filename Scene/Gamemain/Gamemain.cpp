@@ -13,7 +13,7 @@ void Gamemain::Setup(){
 	count = 0;
 	enemy_number = 0;
     Astar::get().setMap(map.GetStatus());
-	Astar::get().setup(Vec2f(0, 7), Vec2f(0,0));
+	Astar::get().setup(map.GetEnemyChip(), map.GetPlayerChip());
     ui.Setup();
 }
 
@@ -29,8 +29,8 @@ void Gamemain::Update(){
 	}
 	for (int i = 0; i < enemy_number; i++){
 		enemylist.Move(Astar::get().getParentPlayer(), i);
-		Astar::get().setEnemyPos(enemylist.GetVPos(i));
-		Astar::get().setPlayerPos(Vec2f(0,0));
+		Astar::get().setEnemyPos(map.ChangeChip(enemylist.GetPos(i),enemylist.GetSize(i)));
+		Astar::get().setPlayerPos(map.GetPlayerChip());
 		Astar::get().update();
 	}
 	map.Update();
@@ -55,3 +55,4 @@ Scenename Gamemain::Shift(){
 	}
     return Scenename::GAMEMAIN;
 }
+
