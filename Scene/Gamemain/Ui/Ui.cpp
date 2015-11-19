@@ -26,11 +26,12 @@ void Ui::Setup(){
         itemobject[i].size = Vec2f(100, 100);
         itemobject[i].pos = Vec2f(350 + (i/6)*120, 120 - (i%5) * 120);
     }
-
+    is_start = false;
     desk = Texture("res/Texture/desk.png");
     game = Texture("res/Texture/game.png");
     robot = Texture("res/Texture/robot.png");
     comic = Texture("res/Texture/comic.png");
+    floor = Texture("res/Texture/stage_classroom.png");
 }
 void Ui::Cost(const int& cost){
     font.draw("コスト　" , Vec2f(WIDTH / 4, HEIGHT / 2-100),Color::white);
@@ -42,7 +43,7 @@ void Ui::Cost(const int& cost){
 
 void Ui::Draw(){
 
-    drawFillBox(WIDTH / 4, -HEIGHT / 2, WIDTH / 4, HEIGHT, Color::green);
+    //drawFillBox(WIDTH / 4, -HEIGHT / 2, WIDTH / 4, HEIGHT, Color::green);
     /*for (int y = 0; y < 8; y++){
         for (int x = 0; x < 8; x++)
         {
@@ -50,6 +51,7 @@ void Ui::Draw(){
                 WIDTH * 3 / 4 / 8, HEIGHT / 8,100,Color::white);
         }
     }*/
+    FloorDraw();
 
     for (int i = 0; i < static_cast<int>(Item::MAX); i++)
     {
@@ -88,7 +90,6 @@ void Ui::Draw(){
 
         }
     }
-    
 }
 
 void Ui::SelectDraw(Item _item){
@@ -117,4 +118,11 @@ Item Ui::Select(Item _item){
     return _item;
 }
 
+void Ui::FloorDraw(){
+    drawTextureBox(WIDTH / 4, -HEIGHT / 2,
+        WIDTH * 3 / 4, HEIGHT,
+        0, 0,
+        1024, 1024, floor, 
+        Color(0.0f, 1.0f, 1.0f, 0.3f));
+}
 

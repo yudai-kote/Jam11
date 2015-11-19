@@ -12,7 +12,7 @@ public:
     Item Select(Item _item);
     void SelectDraw(Item _item);
 
-
+    bool is_start;
 
 private:
     Font font = Font("res/meiryo.ttc");
@@ -23,6 +23,9 @@ private:
     Texture game;
     Texture robot;
     Texture comic;
+    Texture floor;
+
+    void FloorDraw();
 
 
     
