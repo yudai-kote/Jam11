@@ -293,6 +293,34 @@ Vec2f Map::GetEnemyPos(){
 	return Vec2f(0.0f, 0.0f);
 }
 
+Vec2f Map::GetPlayerChip(){
+	for (unsigned y = 0; y < block.size(); y++)
+	{
+		for (unsigned x = 0; x < block[y].size(); x++)
+		{
+			if (block[y][x].blocktype == PLAYER_START_POS)
+			{
+				return Vec2f(x,y);
+			}
+		}
+	}
+	return Vec2f(0.0f, 0.0f);
+
+}
+Vec2f Map::GetEnemyChip(){
+	for (unsigned y = 0; y < block.size(); y++)
+	{
+		for (unsigned x = 0; x < block[y].size(); x++)
+		{
+			if (block[y][x].blocktype == ENEMY_START_POS)
+			{
+				return Vec2f(x, y);
+			}
+		}
+	}
+	return Vec2f(0.0f, 0.0f);
+}
+
 
 int Map::GetCost(){
 	return cost;
@@ -304,4 +332,18 @@ std::vector<std::vector<int>> Map::GetStatus(){
 
 void Map::SetIsFillBox(bool is_box){
 	is_fillbox = is_box;
+}
+
+
+Vec2f Map::ChangeChip(Vec2f pos, Vec2f size){
+	for (unsigned y = 0; y < block.size(); y++)
+	{
+		for (unsigned x = 0; x < block[y].size(); x++)
+		{
+			if (pointCollision(Vec2f(pos.x() + size.x() / 2, pos.y() + size.y() / 2), block_element[y][x].pos, block_element[y][x].size))
+			{
+				return Vec2f(x, y);
+			}
+		}
+	}
 }
