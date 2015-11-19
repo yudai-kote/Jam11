@@ -4,22 +4,27 @@ Enemy::Enemy(){
 	size = Vec2f(100, 100);
 	direction = Direction::NONE;
 	speed = 2;
+	animation_count = 0;
 }
+void Enemy::Animation(){
+	animation_count++;
+	int index = (animation_count) % 40;
+	float x = (index) % 8 * 512.0f;
 
-void Enemy::Move(Direction astar_direction){
-	
+}
+void Enemy::Move(int astar_direction){
 	switch (astar_direction)
 	{
-	case Direction::UP:
-		pos.y() -= speed;
-		break;
-	case Direction::DOWN:
+	case static_cast<int>(Direction::UP):
 		pos.y() += speed;
 		break;
-	case Direction::RIGHT:
+	case static_cast<int>(Direction::DOWN) :
+		pos.y() += speed;
+		break;
+	case static_cast<int>(Direction::RIGHT) :
 		pos.x()+= speed;
 		break;
-	case Direction::LEFT:
+	case static_cast<int>(Direction::LEFT) :
 		pos.x()-= speed;
 		break;
 	}
