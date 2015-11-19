@@ -15,16 +15,6 @@ void Block::Update(){
 
 void Block::Draw(){
 
-	/*drawTextureBox(block.pos.x(), block.pos.y(), block.size.x(), block.size.y(),
-				   block.offset_pos.x(), block.offset_pos.y(),
-				   block.offset_size.x(), block.offset_size.y(),
-				   block.tex,block.color,
-				   block.angle,
-				   block.zoom,block.center);*/
-
-	drawFillBox(block.pos.x(), block.pos.y(), block.size.x(), block.size.y(), block.color,
-				block.angle,
-				block.zoom, block.center);
 	if (is_desk == Item::DESK){
 		drawTextureBox(block.pos.x(), block.pos.y(),
 					   block.size.x(), block.size.y(),
