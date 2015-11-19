@@ -12,7 +12,7 @@ public:
     Item Select(Item _item);
     void SelectDraw(Item _item);
     void CountDraw();
-    bool is_start;
+    bool IsStart();
 
 private:
     Font font = Font("res/kokubanB.ttf");
@@ -28,8 +28,9 @@ private:
 
     void FloorDraw();
     void FontStart();
-
+    void CountReset();
     int count;
+    
     
 };
 

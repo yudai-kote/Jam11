@@ -13,7 +13,7 @@ void Gamemain::Setup(){
     
 	count = 0;
 	enemy_number = 0;
-    astar.setMap(map.GetStatus());
+    Astar::get().setMap(map.GetStatus());
     ui.Setup();
 }
 
@@ -28,7 +28,9 @@ void Gamemain::Update(){
 		}
 	}
 	for (int i = 0; i < enemy_number; i++){
-		
+		Astar::get().setEnemyPos(enemylist.GetPos(i));
+		Astar::get().setPlayerPos(map.GetPlayerPos());
+		enemylist.Move(static_cast<int>(Direction::DOWN),i);
 	}
 	map.Update();
     player.SetSelectItem(ui.Select(player.GetSelectItem()));
