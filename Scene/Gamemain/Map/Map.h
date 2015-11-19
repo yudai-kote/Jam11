@@ -66,6 +66,11 @@ public:
 
 	Vec2f GetPlayerPos();
 	Vec2f GetEnemyPos();
+	Vec2f GetPlayerChip();
+	Vec2f GetEnemyChip();
+
+	Vec2f ChangeChip(Vec2f pos, Vec2f size);
+
 	int GetCost();
 	std::vector<std::vector<int>> GetStatus();
 
