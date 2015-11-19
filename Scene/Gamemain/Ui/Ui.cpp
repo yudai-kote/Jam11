@@ -20,7 +20,6 @@ Ui::Ui()
 
 
 void Ui::Setup(){
-    font.size(80);
     for (int i = 0; i < static_cast<int>(Item::MAX); i++)
     {
         itemobject[i].size = Vec2f(100, 100);
@@ -36,6 +35,8 @@ void Ui::Setup(){
     count = 181;
 }
 void Ui::Cost(const int& cost){
+    font.size(80);
+
     font.draw("コスト　" , Vec2f(WIDTH / 4, HEIGHT / 2-100),Color::white);
     font.draw(std::to_string(cost), Vec2f(WIDTH / 2 - font.drawSize(std::to_string(cost)).x()-30,
         HEIGHT / 2 - 200), Color::white);
@@ -123,6 +124,7 @@ void Ui::Draw(){
     if (count < 181 && count > 0){
         count--;
     }
+    CountDraw();
 }
 
 void Ui::SelectDraw(Item _item){
@@ -176,13 +178,23 @@ void Ui::FontStart(){
 
 
 bool Ui::IsStart(){
-    return count == 0;
+    return count <= 0;
 }
 
 void Ui::CountDraw(){
     font.size(100);
-    if (count > 0 && count <181)
-        font.draw(std::to_string(count / 60), Vec2f(0, 0), Color::yellow);
-
+    
+    if (count > 0 && count < 181){
+        font.draw(std::to_string(count / 60+1),env.mousePosition(), Color::yellow);
+    }
+    if (IsStart()){
+        count--;
+        if(count > -60)
+        
+        font.draw("スタート", env.mousePosition(), Color::yellow);
+    }
 }
 
+void Ui::CountReset(){
+    count = 181;
+}

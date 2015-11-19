@@ -28,8 +28,9 @@ private:
 
     void FloorDraw();
     void FontStart();
-
+    void CountReset();
     int count;
+    
     
 };
 
