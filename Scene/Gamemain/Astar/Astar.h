@@ -14,11 +14,6 @@ private:
 		int parent = 0;
 	};
 
-	enum{
-		WIDE = 8,
-		LENGTH = 8,
-	};
-
 	enum Block{
 		AIR_BLOCK,
 		BLOCK,

@@ -71,6 +71,11 @@ enum class Item{
 
 };
 
+enum class Block_size{
+	LENGTH = 8,
+	WIDE = 8,
+};
+
 struct Object{
 	Vec2f pos;			//原点位置
 	Vec2f size;			//サイズ
@@ -85,5 +90,3 @@ struct Object{
 	Vec2f zoom;
 	Vec2f center;
 };
-
-static Vec2f null = Vec2f(200000000, 200000000);

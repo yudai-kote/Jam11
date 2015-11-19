@@ -2,13 +2,17 @@
 
 Astar::Astar(){
 
-	map = std::vector<std::vector<MapChip>>(LENGTH, std::vector<MapChip>(WIDE));
+	map = std::vector<std::vector<MapChip>>(static_cast<int>(Block_size::LENGTH), std::vector<MapChip>(static_cast<int>(Block_size::WIDE)));
 }
 
 
 
 void Astar::setup(Vec2f enemy_pos, Vec2f player_pos){
 
+	enemy_pos.x() = enemy_pos.x() / (WIDTH * 3 / 4 / static_cast<int>(Block_size::WIDE));
+	enemy_pos.y() = enemy_pos.y() / (HEIGHT / static_cast<int>(Block_size::LENGTH));
+	player_pos.x() = player_pos.x() / (WIDTH * 3 / 4 / static_cast<int>(Block_size::WIDE));
+	player_pos.y() = player_pos.y() / (HEIGHT / static_cast<int>(Block_size::LENGTH));
 
 	for (int y = 0; y < map.size(); y++)
 	{
@@ -86,7 +90,7 @@ void Astar::algorithm(){
 
 		if (search_pos.x() >= 0 && search_pos.y() >= 0)
 		{
-			if (search_pos.x() < WIDE && search_pos.y() < LENGTH)
+			if (search_pos.x() < static_cast<int>(Block_size::WIDE) && search_pos.y() < static_cast<int>(Block_size::LENGTH))
 			{
 				if (map[search_pos.y()][search_pos.x()].search == NONE)
 				{
@@ -203,11 +207,17 @@ int Astar::getParentPlayer(){
 
 
 void Astar::setEnemyPos(Vec2f enemy_pos){
+
+	enemy_pos.x() = enemy_pos.x() / (WIDTH * 3 / 4 / static_cast<int>(Block_size::WIDE));
+	enemy_pos.y() = enemy_pos.y() / (HEIGHT / static_cast<int>(Block_size::LENGTH));
+
 	_enemy_pos = Vec2i((float)enemy_pos.x(), (float)enemy_pos.y());
 	enemy_end_pos = Vec2i((float)enemy_pos.x(), (float)enemy_pos.y());
 }
 
 void Astar::setPlayerPos(Vec2f player_pos){
+	player_pos.x() = player_pos.x() / (WIDTH * 3 / 4 / static_cast<int>(Block_size::WIDE));
+	player_pos.y() = player_pos.y() / (HEIGHT / static_cast<int>(Block_size::LENGTH));
 	_player_pos = Vec2i((float)player_pos.x(), (float)player_pos.y());
 }
 
