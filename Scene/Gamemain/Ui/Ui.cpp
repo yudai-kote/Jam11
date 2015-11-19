@@ -155,8 +155,18 @@ void Ui::FloorDraw(){
 }
 void Ui::FontStart(){
     font.size(60);
+    Color a = Color::yellow;
+    if (collision(env.mousePosition(), Vec2f(WIDTH / 2 - font.drawSize("スタート").x() - 50,
+        -HEIGHT / 2 + 100), font.drawSize("スタート"))){
+        a = Color::red;
+        if (env.isPushButton(Mouse::LEFT)){
+
+
+        }
+    }
+
     font.draw("スタート", Vec2f(WIDTH / 2 - font.drawSize("スタート").x() - 50,
         -HEIGHT / 2+100)
-        ,Color::yellow);
+        ,a);
 }
 

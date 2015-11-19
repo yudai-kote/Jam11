@@ -29,7 +29,7 @@ private:
     void FloorDraw();
     void FontStart();
 
-    
+    int count;
     
 };
 
