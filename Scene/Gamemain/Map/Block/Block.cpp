@@ -33,7 +33,14 @@ void Block::Draw(){
 					   *tex_list[DESK],
 					   Color::white);
 	}
-
+	if (blocktype == '1'){
+		drawTextureBox(block.pos.x(), block.pos.y(),
+					   block.size.x(), block.size.y(),
+					   block.offset_pos.x(), block.offset_pos.y(),
+					   block.offset_size.x(), block.offset_size.y(),
+					   *tex_list[DESK],
+					   Color::red);
+	}
 	switch (category){
 	case Item::AIR:
 
@@ -66,7 +73,7 @@ void Block::Draw(){
 					   Color::white);
 		break;
 	}
-
+	
 	
 }
 

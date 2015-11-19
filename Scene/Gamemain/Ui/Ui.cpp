@@ -80,7 +80,7 @@ void Ui::Draw(){
                 itemobject[i].size.x(), itemobject[i].size.y(), 0, 0, 512, 512,game);
 
             break;
-
+        
 
 
         }
