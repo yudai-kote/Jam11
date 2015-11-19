@@ -29,7 +29,7 @@ void Gamemain::Update(){
 	}
 	for (int i = 0; i < enemy_number; i++){
 		enemylist.Move(Astar::get().getParentPlayer(), i);
-		Astar::get().setEnemyPos(map.ChangeChip(enemylist.GetPos(i),enemylist.GetSize(i)));
+		Astar::get().setEnemyPos(map.ChangeChip(enemylist.GetPos(i),/*enemylist.GetSize(i)*/Vec2f(100,100)));
 		Astar::get().setPlayerPos(map.GetPlayerChip());
 		Astar::get().update();
 	}
