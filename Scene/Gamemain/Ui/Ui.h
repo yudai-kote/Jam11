@@ -15,7 +15,7 @@ public:
     bool is_start;
 
 private:
-    Font font = Font("res/meiryo.ttc");
+    Font font = Font("res/kokubanB.ttf");
     
     Object itemobject[static_cast<int>(Item::MAX)];
     //Texture comic;
