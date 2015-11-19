@@ -13,7 +13,7 @@ public:
 	Enemylist();
 	void PushEnemy(Vec2f pos,int count);
 	void Draw();
-	void Move(Direction direction, int i);
+	void Move(int direction, int i);
 	Vec2f GetPos(int i);
 	int GetSpeed(int i);
 	void SetPos(Vec2f set,int i);

@@ -9,11 +9,23 @@ Enemylist::Enemylist(){
 
 }
 
+
+
 void Enemylist::PushEnemy(Vec2f pos, int count){
 
 		l_enemy.push_back(new Gal(stage[count], count,pos));
 		
 	
+}
+
+void Enemylist::Move(int direction, int i){
+	for (auto itr = l_enemy.begin(); itr != l_enemy.end(); ++itr)
+	{
+		if (i == (*itr)->GetNum()){
+			(*itr)->Move(direction);
+		}
+		(*itr)->Animation();
+	}
 }
 
  Vec2f Enemylist::GetPos(int i){
@@ -47,7 +59,7 @@ void Enemylist::Draw(){
 	for (auto itr = l_enemy.begin(); itr != l_enemy.end(); ++itr)
 	{
 		drawFillBox((*itr)->GetPos().x(), (*itr)->GetPos().y(), (*itr)->GetSize().x(),
-			(*itr)->GetSize().y(), Color::cyan);
+			(*itr)->GetSize().y(), Color::white);
 	}
 	
 }
