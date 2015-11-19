@@ -11,7 +11,7 @@ Player::Player(){
 void Player::Setup(){
     cost = 50;
     select_Item = Item::DESK;
-    player = Texture("res/character/fuukiiinn.png");
+    player = Texture("res/Texture/fuukiiinn.png");
     
 }
 
